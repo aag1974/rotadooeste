@@ -37,6 +37,7 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   position:fixed;left:0;right:0;bottom:0;z-index:200;height:46px;
   background:var(--dark);border-top:1px solid rgba(197,217,46,.2);
   display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+  border-radius:0;
 }
 .logo-opiniao img{height:26px;display:block;filter:brightness(0) invert(1);opacity:.6;}
 .controls{display:flex;align-items:center;gap:6px;user-select:none;}
@@ -165,6 +166,28 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 .tbl td{padding:6px 8px;border-bottom:1px solid rgba(229,231,235,.5);color:var(--ink);}
 
 
+
+/* GATE */
+#gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(148deg,#060a0f 0%,#0d1117 50%,#131c26 100%);}
+#gate-box{background:#fff;border-radius:18px;padding:40px 36px;width:340px;text-align:center;
+  box-shadow:0 12px 48px rgba(0,0,0,.35);}
+#gate-box>img{height:32px;margin-bottom:16px;}
+#gate-box h2{font-size:17px;font-weight:800;color:#0d1117;margin:0 0 6px;}
+#gate-box p{font-size:12.5px;color:#6b7280;margin:0 0 22px;line-height:1.5;}
+#gate-pw{width:100%;padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:10px;
+  font-size:15px;font-family:inherit;outline:none;margin-bottom:10px;box-sizing:border-box;
+  transition:border-color .15s;}
+#gate-pw:focus{border-color:var(--lime);}
+#gate-btn{width:100%;padding:13px;background:var(--dark);color:#fff;border:none;
+  border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
+  transition:background .15s;}
+#gate-btn:hover{background:#1e2a38;}
+#gate-err{color:var(--red);font-size:12px;min-height:18px;margin-top:6px;}
+#gate-opiniao{margin-bottom:20px;}
+#gate-opiniao img{height:38px;}
+
 /* SUMÁRIO */
 .toc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;flex:1;min-height:0;align-content:start;}
 .toc-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;
@@ -206,6 +229,24 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 </head>
 <body>
 
+<div id="gate">
+  <div id="gate-box">
+    <div id="gate-opiniao">
+      <img src="https://grupoopiniao.inf.br/wp-content/uploads/2025/05/OPINIAO_marca_F01-300x196.png"
+           alt="Opinião Informação Estratégica"/>
+    </div>
+    <img src="https://novarotadooeste.com.br/wp-content/uploads/2024/01/logo-nova-rota-white.png"
+         alt="Nova Rota do Oeste"/>
+    <h2>Pesquisa de Satisfação</h2>
+    <p>Documento confidencial.<br/>Insira a senha para continuar.</p>
+    <input id="gate-pw" type="password" placeholder="Senha"
+      onkeydown="if(event.key==='Enter')gateCheck()"
+      onfocus="this.style.borderColor='var(--lime)'"
+      onblur="this.style.borderColor='#e5e7eb'"/>
+    <div id="gate-err"></div>
+    <button id="gate-btn" onclick="gateCheck()">Acessar</button>
+  </div>
+</div>
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-logo">
@@ -412,7 +453,7 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
       </div>
     </div>
   </div>
-  <p class="footnote">n = 203 · Onda 1 · Pontos de coleta: Cuiabá, Nova Mutum, Sorriso, Sinop.</p>
+  <p class="footnote">n = 203 · Onda 1 · Pontos de coleta: Várzea Grande, Nova Mutum, Sorriso, Sinop.</p>
 </section>
 
 <!-- ══ CHAPTER B ════════════════════════════════════════════ -->
@@ -1191,7 +1232,7 @@ const D = {
 
   // CIDADES
   cidades: [
-    {label:"Cuiabá",        n:48,  pct:23.6},
+    {label:"Várzea Grande", n:48,  pct:23.6},
     {label:"Nova Mutum",    n:47,  pct:23.2},
     {label:"Sinop",         n:78,  pct:38.4},
     {label:"Sorriso",       n:30,  pct:14.8},
@@ -1985,5 +2026,68 @@ function renderSintese() {
   render();
 })();
 </script>
+<script>
+(function(){
+  var HASH='d7bb485466df103a446a311764145dd562e52cdfc92b1530df365349ff4d7bf6';
+  var KEY='nro_apn_auth';
+
+  function sha256(str){
+    function rr(n,d){return(n>>>d)|(n<<(32-d));}
+    var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+           0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+           0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+           0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+           0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+           0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+           0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+           0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+    var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+    var msg=unescape(encodeURIComponent(str));
+    var bytes=[];
+    for(var i=0;i<msg.length;i++) bytes.push(msg.charCodeAt(i));
+    bytes.push(0x80);
+    while(bytes.length%64!==56) bytes.push(0);
+    var L=msg.length*8;
+    for(var i=7;i>=0;i--) bytes.push((L/Math.pow(2,i*8))&0xff);
+    for(var chunk=0;chunk<bytes.length;chunk+=64){
+      var w=[];
+      for(var i=0;i<16;i++) w[i]=(bytes[chunk+i*4]<<24)|(bytes[chunk+i*4+1]<<16)|(bytes[chunk+i*4+2]<<8)|bytes[chunk+i*4+3];
+      for(var i=16;i<64;i++){var s0=rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>>3);var s1=rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>>10);w[i]=(w[i-16]+s0+w[i-7]+s1)>>>0;}
+      var a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h2=H[7];
+      for(var i=0;i<64;i++){var S1=rr(e,6)^rr(e,11)^rr(e,25);var ch=(e&f)^(~e&g);var temp1=(h2+S1+ch+K[i]+w[i])>>>0;var S0=rr(a,2)^rr(a,13)^rr(a,22);var maj=(a&b)^(a&c)^(b&c);var temp2=(S0+maj)>>>0;h2=g;g=f;f=e;e=(d+temp1)>>>0;d=c;c=b;b=a;a=(temp1+temp2)>>>0;}
+      H[0]=(H[0]+a)>>>0;H[1]=(H[1]+b)>>>0;H[2]=(H[2]+c)>>>0;H[3]=(H[3]+d)>>>0;H[4]=(H[4]+e)>>>0;H[5]=(H[5]+f)>>>0;H[6]=(H[6]+g)>>>0;H[7]=(H[7]+h2)>>>0;
+    }
+    return H.map(function(x){return x.toString(16).padStart(8,'0');}).join('');
+  }
+
+  function unlock(){var g=document.getElementById('gate');if(g)g.parentNode.removeChild(g);}
+
+  // Acesso por parâmetro URL ou localStorage
+  var params=new URLSearchParams(window.location.search);
+  if(params.get('auth')==='1'||localStorage.getItem(KEY)==='1'){
+    localStorage.setItem(KEY,'1'); unlock(); return;
+  }
+
+  setTimeout(function(){
+    var pw=document.getElementById('gate-pw');
+    if(pw) pw.focus();
+  },120);
+
+  window.gateCheck=function(){
+    var val=document.getElementById('gate-pw').value;
+    var err=document.getElementById('gate-err');
+    if(!val){err.textContent='Digite a senha.';return;}
+    if(sha256(val)===HASH){
+      localStorage.setItem(KEY,'1');
+      unlock();
+    } else {
+      err.textContent='Senha incorreta. Tente novamente.';
+      document.getElementById('gate-pw').value='';
+      document.getElementById('gate-pw').focus();
+    }
+  };
+})();
+</script>
+
 </body>
 </html>

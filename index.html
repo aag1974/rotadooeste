@@ -115,6 +115,11 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 /* GRIDS */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,18px);align-items:stretch;}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(8px,1vw,14px);align-items:stretch;}
+/* Painel de pares score↔distribuição (C1, F2).
+   Desktop: 3 colunas × 2 linhas (linha 1 = scores, linha 2 = distribuições, alinhadas).
+   Mobile: 1 coluna intercalando score → dist → score → dist (ver @media). */
+.painel-pares{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto 1fr;gap:clamp(8px,1vw,14px);align-items:stretch;min-height:0;}
+.painel-pares > .card{min-width:0;}
 .grid-asym{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(10px,1.2vw,18px);align-items:stretch;}
 
 /* BARS */
@@ -141,8 +146,11 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 .nps-group .ng-pct{font-size:clamp(20px,2.2vw,30px);font-weight:800;line-height:1;}
 .nps-group .ng-n{font-size:10px;color:var(--muted);margin-top:2px;}
 .nps-group .ng-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
-.nps-bar{display:flex;height:12px;border-radius:6px;overflow:hidden;margin-top:14px;gap:2px;}
-.nps-bar-seg{height:100%;border-radius:3px;}
+/* Barra empilhada (NPS e indicadores de escala). Grid proporcional via fr em grid-template-columns inline.
+   Grid é mais previsível que flex para segmentos proporcionais: cada cell tem largura fr exata,
+   gap é descontado corretamente, e min-content não interfere. */
+.nps-bar{display:grid;width:100%;height:12px;border-radius:6px;overflow:hidden;margin-top:14px;gap:2px;grid-auto-flow:column;}
+.nps-bar-seg{height:100%;border-radius:3px;min-width:0;}
 .nps-dist{display:flex;align-items:flex-end;gap:3px;height:60px;margin-top:14px;}
 .nps-dist-col{display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end;}
 .nps-dist-bar{width:100%;border-radius:3px 3px 0 0;}
@@ -274,7 +282,7 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 .driver-row:first-child{border-top:0;padding-top:2px;}
 .driver-lbl{min-width:0;flex:0 0 175px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .driver-bar-wrap{flex:1;height:20px;background:rgba(197,217,46,.10);border-radius:4px;overflow:hidden;}
-.driver-bar-fill{height:100%;border-radius:4px;transition:width .4s;}
+.driver-bar-fill{height:100%;border-radius:4px;}
 .driver-val{flex:0 0 42px;text-align:right;font-weight:800;font-size:12px;}
 .driver-sig{flex:0 0 20px;font-size:13px;}
 .driver-ns{opacity:.38;}
@@ -291,6 +299,16 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   /* Todos os grids multi-col → 1 col. kpis-4 → 2×2 (mais compacto que 4×1). */
   .grid2,.grid3,.grid-asym,.kpis-3,.nps-groups{grid-template-columns:1fr!important;}
   .kpis-4{grid-template-columns:repeat(2,1fr)!important;}
+
+  /* Painel de pares (C1/F2): intercala score → dist → score → dist em 1 col.
+     DOM traz os 3 scores primeiro e as 3 distribuições depois; `order` reordena. */
+  .painel-pares{grid-template-columns:1fr!important;grid-template-rows:none!important;}
+  .painel-pares > :nth-child(1){order:1;} /* score 1 */
+  .painel-pares > :nth-child(4){order:2;} /* dist  1 */
+  .painel-pares > :nth-child(2){order:3;} /* score 2 */
+  .painel-pares > :nth-child(5){order:4;} /* dist  2 */
+  .painel-pares > :nth-child(3){order:5;} /* score 3 */
+  .painel-pares > :nth-child(6){order:6;} /* dist  3 */
 
   .hero-bg{display:none;}
   .title{font-size:clamp(20px,5vw,28px);line-height:1.1;}
@@ -376,7 +394,8 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 @media(max-width:768px){
   .slide > .grid2,
   .slide > .grid3,
-  .slide > .grid-asym{
+  .slide > .grid-asym,
+  .slide > .painel-pares{
     flex:0 0 auto!important;
     align-items:stretch;
   }
@@ -938,12 +957,10 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 
   <div class="headline-analitica" id="c1-headline"></div>
 
-  <div class="grid3" style="flex-shrink:0">
+  <div class="painel-pares" style="flex:1;min-height:0">
     <div class="card" id="c1-card-pav"></div>
     <div class="card" id="c1-card-sin"></div>
     <div class="card" id="c1-card-seg"></div>
-  </div>
-  <div class="grid3" style="flex:1;min-height:0">
     <div class="card" id="c1-dist-pav"></div>
     <div class="card" id="c1-dist-sin"></div>
     <div class="card" id="c1-dist-seg"></div>
@@ -1054,7 +1071,7 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
     <div class="card" id="d2-card-clareza"></div>
     <div class="card" id="d2-card-seg"></div>
     <div class="card" id="d2-card-ritmo"></div>
-    <div class="card" id="d2-card-impacto"></div>
+    <div class="card" id="d2-card-fluidez"></div>
   </div>
   <div class="card" style="flex-shrink:0">
     <div class="diretriz-label">Diretriz analítica</div>
@@ -1172,15 +1189,11 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 
   <div class="headline-analitica" id="f2-headline"></div>
 
-  <!-- Linha 1: 3 indicator cards -->
-  <div class="grid3" style="flex-shrink:0">
+  <!-- Painel de pares score↔distribuição (intercala no mobile) -->
+  <div class="painel-pares" style="flex:1;min-height:0">
     <div class="card" id="f2-card-csat"></div>
     <div class="card" id="f2-card-ces"></div>
     <div class="card" id="f2-card-conf"></div>
-  </div>
-
-  <!-- Linha 2: 3 distribution cards -->
-  <div class="grid3" style="flex:1;min-height:0">
     <div class="card" id="f2-dist-csat"></div>
     <div class="card" id="f2-dist-ces"></div>
     <div class="card" id="f2-dist-conf"></div>
@@ -1480,10 +1493,10 @@ const D = {
         "dir": 1
       },
       {
-        "label": "Impacto obras (tempo)",
-        "beta": 0.008,
+        "label": "Fluidez (tempo)",
+        "beta": -0.008,
         "sig": false,
-        "dir": 1
+        "dir": -1
       }
     ],
     "nps": [
@@ -1530,10 +1543,10 @@ const D = {
         "dir": 1
       },
       {
-        "label": "Impacto obras (tempo)",
-        "beta": -0.063,
+        "label": "Fluidez (tempo)",
+        "beta": 0.063,
         "sig": false,
-        "dir": -1
+        "dir": 1
       }
     ],
     "comparativo": [
@@ -2261,18 +2274,18 @@ const D = {
       }
     ]
   },
-  "impacto": {
-    "media": 2.63,
-    "t2b": 25.0,
-    "b2b": 51.3,
+  "fluidez": {
+    "media": 3.37,
+    "t2b": 51.3,
+    "b2b": 25.0,
     "dist": [
       {
         "nota": 1,
-        "pct": 25.3
+        "pct": 15.1
       },
       {
         "nota": 2,
-        "pct": 26.1
+        "pct": 9.9
       },
       {
         "nota": 3,
@@ -2280,11 +2293,11 @@ const D = {
       },
       {
         "nota": 4,
-        "pct": 9.9
+        "pct": 26.1
       },
       {
         "nota": 5,
-        "pct": 15.1
+        "pct": 25.3
       }
     ]
   },
@@ -2324,12 +2337,12 @@ const D = {
         ]
       },
       {
-        "label": "Impacto tempo",
+        "label": "Fluidez",
         "vals": [
-          2.66,
-          2.77,
-          2.81,
-          2.37
+          3.34,
+          3.23,
+          3.19,
+          3.63
         ]
       }
     ]
@@ -6038,11 +6051,11 @@ const D = {
     d1_headline: "<b>96,6% passaram por obras</b> na rodovia recentemente, mas <b class='hl-red'>apenas 20,7% atribuem a execução à Nova Rota do Oeste</b>. A maioria acredita ser responsabilidade do <b class='hl-amber'>Governo do Estado (39,8%)</b> ou <b class='hl-amber'>não sabe informar (27,2%)</b>. <b class='hl-ink'>Quem executa as intervenções não é reconhecido por fazê-lo</b>.",
     d1_diretriz: "Possivelmente o <b class='hl-green'>achado com maior potencial de retorno de comunicação</b> da pesquisa — investimento físico gera valor de marca apenas quando reconhecido como tal. <b class='hl-ink'>Sinalização nos canteiros (placas, tapumes, faixas)</b> associando cada intervenção à Nova Rota converte investimento em percepção. Vincular explicitamente quilômetros entregues à concessionária em comunicação digital e rádio amplia o impacto reputacional das entregas.",
 
-    d2_headline: "O usuário <b class='hl-green'>entende o que está acontecendo</b>, mas <b class='hl-red'>sente o custo operacional</b>. <b class='hl-green'>Clareza (4,25 · 82% positivas)</b> é o melhor indicador do estudo; <b class='hl-red'>Impacto no tempo (2,63 · 51% insatisfação)</b> é o pior. Ritmo (3,32) e Segurança nas obras (3,15) ficam no meio.",
+    d2_headline: "O usuário <b class='hl-green'>entende o que está acontecendo</b>, mas <b class='hl-red'>sente o custo operacional</b>. <b class='hl-green'>Clareza (4,25 · 82% positivas)</b> é o melhor indicador do estudo; <b class='hl-red'>Segurança nas obras (3,15 · apenas 39% positivas)</b> é o mais frágil. Ritmo (3,32) e Fluidez apesar das obras (3,37) ficam no meio — mas ambas com um quarto da base em nota 1 ou 2.",
     d2_diretriz: "Frente estratégica: <b class='hl-ink'>preservar a compreensão atual enquanto se reduz o custo percebido</b>. A comunicação sobre o porquê das obras está funcionando (82% entendem) — <b class='hl-green'>manter esse ativo</b>. O desafio operacional é alinhar o ritmo de execução com a expectativa do usuário: <b class='hl-red'>menos tempo em pare-e-siga, melhor condução do fluxo e previsibilidade na entrega</b> são as três alavancas que reduzem o atrito sem comprometer o entendimento já conquistado.",
 
-    d3_headline: "Usuários de <b class='hl-red'>menor frequência (mensais)</b> expressam avaliações mais duras — <b class='hl-red'>Impacto no tempo cai a 2,37</b> e Segurança nas obras vai a 2,98. Diários e semanais têm avaliações mais estáveis. <b class='hl-green'>Clareza se mantém elevada em todas as faixas (4,04–4,32)</b>: a comunicação do motivo das obras alcança todos os perfis.",
-    d3_diretriz: "Quem convive diariamente com as obras <b class='hl-ink'>desenvolveu adaptação</b> — conhece horários, trechos críticos, ajusta expectativa. Quem passa esporadicamente encontra a rodovia sempre sob intervenção, sem familiaridade que amortece o impacto. Duas frentes: para alta frequência, <b class='hl-green'>informação em tempo real nos canais em rota</b> reduz atrito; para esporádicos — boa parte vinda de outros estados — <b class='hl-green'>comunicação proativa antes da viagem</b> prepara expectativa.",
+    d3_headline: "O cruzamento por frequência revela uma <b class='hl-ink'>assimetria de exposição</b>: <b class='hl-green'>mensais relatam a maior fluidez (3,63)</b> — passam pouco e não acumulam o custo do pare-e-siga —, mas registram a <b class='hl-red'>menor nota em Segurança nas obras (2,98)</b>, única abaixo de 3 no painel. Diários e semanais vivem o oposto: convivem com o atrito do fluxo (fluidez 3,34 e 3,23) e têm leituras de segurança mais estáveis (3,13–3,16). <b class='hl-green'>Clareza se mantém elevada em todas as faixas (4,04–4,32)</b>.",
+    d3_diretriz: "<b class='hl-ink'>Duas dores, dois públicos</b>. Quem convive diariamente com as obras carrega o <b class='hl-red'>atrito do fluxo</b> — pare-e-siga, tempo perdido, previsibilidade baixa; para essa faixa, <b class='hl-green'>informação em tempo real nos canais em rota</b> e gestão de filas nos canteiros atacam a dor certa. Quem passa esporadicamente preserva o tempo de viagem, mas cada passagem <b class='hl-red'>expõe o canteiro sem a familiaridade que amortece a percepção de risco</b> — para esse público, <b class='hl-green'>sinalização de obras mais assertiva e comunicação proativa antes da viagem</b> preparam expectativa e reduzem o choque visual.",
 
     e1_headline: "<b>28,6% já utilizaram algum serviço</b> da concessionária (110 entrevistados). Entre esses, <b class='hl-green'>guincho/apoio mecânico domina (85,5%)</b>, seguido de ambulância (18,2%) e SAU (8,2%). Perfil coerente com caminhoneiros em longas distâncias.",
     e1_diretriz: "O <b class='hl-green'>guincho é a principal interface</b> entre a Nova Rota e o usuário de campo. Quem precisou entrou em contato direto com a operação — e, como mostra o próximo slide, <b class='hl-green'>com experiência bastante positiva</b>. Ampliar alcance via painéis, rádio e WhatsApp transforma um serviço pontual em <b class='hl-ink'>sinalização constante de presença</b>.",
@@ -6076,7 +6089,7 @@ const D = {
     i1_diretriz: "Para mover satisfação: <b class='hl-green'>prioridade absoluta é pavimento</b>, reforçado pelo ritmo de entrega das obras. Comunicação e transparência (confiança, clareza) aparecem como drivers secundários — úteis para sustentar a narrativa enquanto a entrega física acontece. <b>O modelo explica 54% da variação</b> na satisfação — base sólida para priorizar investimento.",
 
     i2_achado: "<b class='hl-green'>Pavimento é o driver dominante tanto da satisfação quanto do NPS</b> — mas o NPS tem um perfil bem mais distribuído: cinco fatores com peso relevante, enquanto na satisfação o pavimento concentra o efeito principal.",
-    i2_headline: "<b class='hl-ink'>O NPS tem um perfil de drivers mais distribuído</b> que a satisfação. Cinco fatores significativos: <b class='hl-green'>Pavimento (β=+0,25)</b> no topo, seguido de <b class='hl-green'>Segurança geral (β=+0,20)</b>, <b>Ritmo das obras (β=+0,16)</b>, <b>Sinalização (β=+0,16)</b> e <b>Confiança (β=+0,14)</b>. Nenhum driver com efeito negativo significativo — Impacto no tempo teve coeficiente −0,06 mas não atingiu significância estatística nesta onda.",
+    i2_headline: "<b class='hl-ink'>O NPS tem um perfil de drivers mais distribuído</b> que a satisfação. Cinco fatores significativos: <b class='hl-green'>Pavimento (β=+0,25)</b> no topo, seguido de <b class='hl-green'>Segurança geral (β=+0,20)</b>, <b>Ritmo das obras (β=+0,16)</b>, <b>Sinalização (β=+0,16)</b> e <b>Confiança (β=+0,14)</b>. Todos os oito preditores têm coeficiente positivo; Fluidez teve β=+0,06 mas não atingiu significância estatística nesta onda.",
     i2_diretriz: "<b class='hl-green'>Pavimento é a alavanca comum</b>: top driver em ambos os modelos. Para o NPS, <b class='hl-ink'>segurança geral e ritmo das obras somam peso relevante adicional</b>; sinalização e confiança aparecem com peso comparável. <b class='hl-lime'>Boa notícia: todas as agendas se reforçam</b> — entregar pavimento move satisfação e NPS; acelerar obras também; reforçar sinalização e comunicação são ganhos independentes sobre o NPS.",
     h2_headline: "A Onda 1 é a <b class='hl-ink'>linha de base</b> da série. A <b class='hl-green'>Onda 2 (prevista para jul/2026)</b> permitirá a primeira comparação nos indicadores críticos; a <b class='hl-green'>Onda 3 (prevista para nov/2026)</b> fecha o ciclo e habilita o <b class='hl-ink'>dashboard longitudinal</b> — conversão do diagnóstico pontual em leitura de trajetória para tomada de decisão contínua.",
     h2_foco: ["NPS","Segurança geral","Ritmo das obras","Atribuição de responsabilidade","Confiança nas informações"],
@@ -6198,23 +6211,28 @@ function barrasV(id, items, opts={}) {
   const valSize   = opts.valSize   || 11;
   const gap       = opts.gap       != null ? opts.gap     : 6;
   const maxColW   = opts.maxColW   != null ? opts.maxColW : 48;
+  // minColW: largura mínima da coluna. Quando o viewport (mobile) é estreito
+  // demais, N × minColW excede o container e o wrapper ativa scroll horizontal,
+  // preservando legibilidade dos rótulos. No desktop, cada coluna cresce até 1fr.
+  const minColW   = opts.minColW   != null ? opts.minColW : 40;
   const max       = Math.max(...items.map(i => i.pct)) || 1;
-  const cols = items.map(() => '1fr').join(' ');
   el.innerHTML = `
-    <div style="display:grid;grid-template-columns:${cols};grid-template-rows:1fr auto;column-gap:${gap}px;row-gap:4px;height:${height}px;padding:0 2px">
-      ${items.map(item => {
-        const c = item.cor || cor;
-        const pctRel = (item.pct / max) * 100;
-        return `
-          <div style="display:flex;flex-direction:column;align-items:center;height:100%;min-width:0">
-            <div style="flex:${Math.max(0, 100 - pctRel)};min-height:0"></div>
-            <span style="font-size:${valSize}px;font-weight:800;color:${c};line-height:1;white-space:nowrap;margin-bottom:2px;flex-shrink:0">${f.pct(item.pct)}</span>
-            <div style="width:100%;max-width:${maxColW}px;flex:${Math.max(0.01, pctRel)};background:${c};border-radius:5px 5px 0 0;min-height:4px"></div>
-          </div>`;
-      }).join('')}
-      ${items.map(item => `
-        <span style="font-size:${labelSize}px;font-weight:600;color:var(--muted);text-align:center;line-height:1.2;word-break:break-word;padding:0 2px;align-self:start">${item.label}</span>
-      `).join('')}
+    <div style="overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;height:${height}px">
+      <div style="display:grid;grid-template-columns:repeat(${items.length}, minmax(${minColW}px, 1fr));grid-template-rows:1fr auto;column-gap:${gap}px;row-gap:4px;height:100%;padding:0 2px;min-width:100%">
+        ${items.map(item => {
+          const c = item.cor || cor;
+          const pctRel = (item.pct / max) * 100;
+          return `
+            <div style="display:flex;flex-direction:column;align-items:center;height:100%;min-width:0">
+              <div style="flex:${Math.max(0, 100 - pctRel)};min-height:0"></div>
+              <span style="font-size:${valSize}px;font-weight:800;color:${c};line-height:1;white-space:nowrap;margin-bottom:2px;flex-shrink:0">${f.pct(item.pct)}</span>
+              <div style="width:100%;max-width:${maxColW}px;flex:${Math.max(0.01, pctRel)};background:${c};border-radius:5px 5px 0 0;min-height:4px"></div>
+            </div>`;
+        }).join('')}
+        ${items.map(item => `
+          <span style="font-size:${labelSize}px;font-weight:600;color:var(--muted);text-align:center;line-height:1.2;overflow-wrap:break-word;hyphens:auto;padding:0 2px;align-self:start">${item.label}</span>
+        `).join('')}
+      </div>
     </div>`;
 }
 
@@ -6258,10 +6276,10 @@ function indicadorCard(id, titulo, dado, opts={}) {
       <span style="font-size:clamp(36px,4vw,58px);font-weight:800;line-height:1;letter-spacing:-.03em;color:${corScore}">${f.med(dado.media)}</span>
       <div style="font-size:10px;color:var(--muted);line-height:1.3">/ 5<br/><span style="font-size:9px">escala 1–5</span></div>
     </div>
-    <div class="nps-bar" style="margin-top:12px">
-      <div class="nps-bar-seg" style="flex:${pct_b2b};background:#dc2626"></div>
-      <div class="nps-bar-seg" style="flex:${pct_neu};background:#9ca3af"></div>
-      <div class="nps-bar-seg" style="flex:${pct_t2b};background:#16a34a"></div>
+    <div class="nps-bar" style="margin-top:12px;grid-template-columns:${pct_b2b}fr ${pct_neu}fr ${pct_t2b}fr">
+      <div class="nps-bar-seg" style="background:#dc2626"></div>
+      <div class="nps-bar-seg" style="background:#9ca3af"></div>
+      <div class="nps-bar-seg" style="background:#16a34a"></div>
     </div>
     <div class="nps-groups" style="gap:5px;margin-top:10px">
       <div class="nps-group" style="background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.15);padding:6px 6px">
@@ -6511,7 +6529,7 @@ function renderPerfil() {
   const ufs_para_barras = D.origem_uf.filter(u => u.label !== 'Não identificada');
   barrasV('a2-origem-uf', ufs_para_barras, {
     cor:'var(--lime)', height:360, maxColW:72, gap:4,
-    labelSize:11, valSize:12
+    labelSize:11, valSize:12, minColW:32
   });
 
   setHtml('a2-leitura', D.txt.a2_leitura);
@@ -6574,10 +6592,13 @@ function renderNPS() {
 
   // barra proporcional
   const bar = document.getElementById('b1-bar');
-  if (bar) bar.innerHTML = `
-    <div class="nps-bar-seg" style="flex:${D.nps_det_pct};background:#dc2626"></div>
-    <div class="nps-bar-seg" style="flex:${D.nps_neu_pct};background:#9ca3af"></div>
-    <div class="nps-bar-seg" style="flex:${D.nps_pro_pct};background:#16a34a"></div>`;
+  if (bar) {
+    bar.style.gridTemplateColumns = `${D.nps_det_pct}fr ${D.nps_neu_pct}fr ${D.nps_pro_pct}fr`;
+    bar.innerHTML = `
+      <div class="nps-bar-seg" style="background:#dc2626"></div>
+      <div class="nps-bar-seg" style="background:#9ca3af"></div>
+      <div class="nps-bar-seg" style="background:#16a34a"></div>`;
+  }
 
   // grupos
   const grp = document.getElementById('b1-groups');
@@ -6649,10 +6670,13 @@ function renderSatGeral() {
 
   // Barra proporcional (insatisfeitos | neutros | satisfeitos)
   const bar = document.getElementById('b2-bar');
-  if(bar) bar.innerHTML = `
-    <div class="nps-bar-seg" style="flex:${pct_b2b};background:#dc2626"></div>
-    <div class="nps-bar-seg" style="flex:${pct_neu};background:#9ca3af"></div>
-    <div class="nps-bar-seg" style="flex:${pct_t2b};background:#16a34a"></div>`;
+  if(bar) {
+    bar.style.gridTemplateColumns = `${pct_b2b}fr ${pct_neu}fr ${pct_t2b}fr`;
+    bar.innerHTML = `
+      <div class="nps-bar-seg" style="background:#dc2626"></div>
+      <div class="nps-bar-seg" style="background:#9ca3af"></div>
+      <div class="nps-bar-seg" style="background:#16a34a"></div>`;
+  }
 
   // Grupos (pills) — 3 caixas equivalentes às do NPS
   const grp = document.getElementById('b2-groups');
@@ -6710,10 +6734,13 @@ function renderEvolucao() {
 
   // Barra proporcional (piorou | igual | melhorou)
   const bar = document.getElementById('b3-bar');
-  if (bar) bar.innerHTML = `
-    <div class="nps-bar-seg" style="flex:${piorou};background:#dc2626"></div>
-    <div class="nps-bar-seg" style="flex:${igual};background:#9ca3af"></div>
-    <div class="nps-bar-seg" style="flex:${melhorou};background:#16a34a"></div>`;
+  if (bar) {
+    bar.style.gridTemplateColumns = `${piorou}fr ${igual}fr ${melhorou}fr`;
+    bar.innerHTML = `
+      <div class="nps-bar-seg" style="background:#dc2626"></div>
+      <div class="nps-bar-seg" style="background:#9ca3af"></div>
+      <div class="nps-bar-seg" style="background:#16a34a"></div>`;
+  }
 
   // Grupos (pills)
   const grp = document.getElementById('b3-groups');
@@ -6787,10 +6814,13 @@ function renderInfra() {
   const seg_neu = Math.max(0, Math.round((100 - seg_b2b - seg_t2b) * 10) / 10);
 
   const barC2 = document.getElementById('c2-bar');
-  if(barC2) barC2.innerHTML = `
-    <div class="nps-bar-seg" style="flex:${seg_b2b};background:#dc2626"></div>
-    <div class="nps-bar-seg" style="flex:${seg_neu};background:#9ca3af"></div>
-    <div class="nps-bar-seg" style="flex:${seg_t2b};background:#16a34a"></div>`;
+  if(barC2) {
+    barC2.style.gridTemplateColumns = `${seg_b2b}fr ${seg_neu}fr ${seg_t2b}fr`;
+    barC2.innerHTML = `
+      <div class="nps-bar-seg" style="background:#dc2626"></div>
+      <div class="nps-bar-seg" style="background:#9ca3af"></div>
+      <div class="nps-bar-seg" style="background:#16a34a"></div>`;
+  }
 
   const grpC2 = document.getElementById('c2-groups');
   if(grpC2) grpC2.innerHTML = `
@@ -6835,7 +6865,7 @@ function renderInfra() {
   // C3 — ranking vertical (9 categorias)
   barrasV('c3-ranking', D.prioridade, {
     cor:'var(--lime)', height:380, maxColW:120, gap:6,
-    labelSize:11, valSize:13
+    labelSize:11, valSize:13, minColW:80
   });
   setHtml('c3-headline', D.txt.c3_headline);
   setHtml('c3-diretriz', D.txt.c3_diretriz);
@@ -6856,7 +6886,7 @@ function renderObras() {
   }));
   barrasV('d1-atribuicao', atr, {
     cor:'#9ca3af', height:360, maxColW:120, gap:6,
-    labelSize:11, valSize:13
+    labelSize:11, valSize:13, minColW:80
   });
   setHtml('d1-headline', D.txt.d1_headline);
   setHtml('d1-diretriz', D.txt.d1_diretriz);
@@ -6868,8 +6898,8 @@ function renderObras() {
            {anchorLow:'muito ruim',          anchorHigh:'muito boa'});
   obraCard('d2-card-ritmo',   'Ritmo das obras',            D.ritmo,
            {anchorLow:'discorda totalmente', anchorHigh:'concorda totalmente'});
-  obraCard('d2-card-impacto', 'Impacto no tempo de viagem', D.impacto,
-           {anchorLow:'nenhum impacto',      anchorHigh:'grande impacto'});
+  obraCard('d2-card-fluidez', 'Fluidez apesar das obras',   D.fluidez,
+           {anchorLow:'grande impacto',      anchorHigh:'nenhum impacto'});
   setHtml('d2-headline', D.txt.d2_headline);
   setHtml('d2-diretriz', D.txt.d2_diretriz);
 
@@ -6936,7 +6966,7 @@ function renderServicos() {
 
   barrasV('e1-quais', D.srv_quais, {
     cor:'var(--lime)', height:340, maxColW:120, gap:6,
-    labelSize:11, valSize:13
+    labelSize:11, valSize:13, minColW:80
   });
   setHtml('e1-headline', D.txt.e1_headline);
   setHtml('e1-diretriz', D.txt.e1_diretriz);
@@ -6962,7 +6992,7 @@ function renderComunicacao() {
   }));
   barrasV('f1-canais', canaisComCor, {
     cor:'var(--lime)', height:340, maxColW:100, gap:5,
-    labelSize:10, valSize:12
+    labelSize:10, valSize:12, minColW:64
   });
   setHtml('f1-headline', D.txt.f1_headline);
   setHtml('f1-diretriz', D.txt.f1_diretriz);
@@ -6994,7 +7024,7 @@ function renderComunicacao() {
   // F3
   barrasV('f3-canal', D.canal_pref, {
     cor:'var(--lime)', height:340, maxColW:100, gap:5,
-    labelSize:10, valSize:12
+    labelSize:10, valSize:12, minColW:80
   });
   setHtml('f3-headline', D.txt.f3_headline);
   setHtml('f3-diretriz', D.txt.f3_diretriz);

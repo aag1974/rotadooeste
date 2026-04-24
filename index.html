@@ -146,7 +146,7 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 .nps-dist{display:flex;align-items:flex-end;gap:3px;height:60px;margin-top:14px;}
 .nps-dist-col{display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end;}
 .nps-dist-bar{width:100%;border-radius:3px 3px 0 0;}
-.nps-dist-lbl{font-size:8.5px;font-weight:700;color:var(--muted);margin-top:3px;}
+.nps-dist-lbl{font-size:11px;font-weight:700;color:var(--muted);margin-top:3px;}
 
 /* SCALA DIST */
 .scala-dist{display:flex;gap:3px;margin-top:8px;}
@@ -182,46 +182,22 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 .hl-lime   { color: var(--lime-txt);font-weight: 700; }
 .hl-ink    { color: var(--ink);     font-weight: 700; }
 
-/* Obras — Responsabilidade (slide 19): barras encorpadas nos cards da esquerda */
-#s-d1 #d1-exposicao .bar-track,
-#s-d1 #d1-atribuicao .bar-track{height:12px;border-radius:6px;}
-#s-d1 #d1-exposicao .bar-fill,
-#s-d1 #d1-atribuicao .bar-fill{border-radius:6px;}
-#s-d1 #d1-exposicao .bar-row,
-#s-d1 #d1-atribuicao .bar-row{font-size:12.5px;}
-#s-d1 #d1-exposicao .bar-item,
-#s-d1 #d1-atribuicao .bar-item{margin-bottom:12px;}
-/* Distribui barras de atribuição para preencher o card de altura flex:1 */
-#s-d1 #d1-atribuicao{display:flex;flex-direction:column;height:100%;}
-#s-d1 #d1-atribuicao .bar-item{flex:1;display:flex;flex-direction:column;justify-content:center;margin-bottom:0;}
-#s-d1 #d1-atribuicao .bar-item + .bar-item{border-top:1px solid rgba(229,231,235,.5);padding-top:8px;}
+/* Headline analítico — takeaway abaixo do título/rule, acima dos resultados */
+.headline-analitica{
+  position:relative;display:block;
+  padding:12px 16px 12px 36px;
+  background:linear-gradient(180deg,rgba(197,217,46,.10),rgba(197,217,46,.03));
+  border-left:4px solid var(--lime);
+  border-radius:0 10px 10px 0;
+  margin:0 0 14px 0;
+  font-size:15.5px;line-height:1.55;color:var(--ink);
+  flex-shrink:0;
+}
+.headline-analitica::before{
+  content:"▸";position:absolute;left:14px;top:13px;
+  color:var(--lime-txt);font-weight:800;font-size:18px;line-height:1;
+}
 
-/* Prioridades (18) · Serviços utilizados (24) · Canais (27) · Canal preferido (29):
-   barras encorpadas + distribuição vertical pela altura do card */
-#s-c3 #c3-ranking .bar-track,
-#s-e1 #e1-quais   .bar-track,
-#s-f1 #f1-canais  .bar-track,
-#s-f3 #f3-canal   .bar-track{height:12px;border-radius:6px;}
-#s-c3 #c3-ranking .bar-fill,
-#s-e1 #e1-quais   .bar-fill,
-#s-f1 #f1-canais  .bar-fill,
-#s-f3 #f3-canal   .bar-fill{border-radius:6px;}
-#s-c3 #c3-ranking .bar-row,
-#s-e1 #e1-quais   .bar-row,
-#s-f1 #f1-canais  .bar-row,
-#s-f3 #f3-canal   .bar-row{font-size:12.5px;}
-#s-c3 #c3-ranking,
-#s-e1 #e1-quais,
-#s-f1 #f1-canais,
-#s-f3 #f3-canal{display:flex;flex-direction:column;height:100%;}
-#s-c3 #c3-ranking .bar-item,
-#s-e1 #e1-quais   .bar-item,
-#s-f1 #f1-canais  .bar-item,
-#s-f3 #f3-canal   .bar-item{flex:1;display:flex;flex-direction:column;justify-content:center;margin-bottom:0;}
-#s-c3 #c3-ranking .bar-item + .bar-item,
-#s-e1 #e1-quais   .bar-item + .bar-item,
-#s-f1 #f1-canais  .bar-item + .bar-item,
-#s-f3 #f3-canal   .bar-item + .bar-item{border-top:1px solid rgba(229,231,235,.5);padding-top:8px;}
 
 /* Barras horizontais encorpadas — chapter A (Pontos de coleta · Sexo · Faixa etária · Uso) */
 #s-a1 #a1-cidades .bar-track,
@@ -298,18 +274,65 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 .driver-val{flex:0 0 42px;text-align:right;font-weight:800;font-size:12px;}
 .driver-sig{flex:0 0 20px;font-size:13px;}
 .driver-ns{opacity:.38;}
-@media(max-width:768px){.toc-grid{grid-template-columns:1fr 1fr;}.driver-lbl{flex:0 0 120px;font-size:11px;}}
-
-/* MOBILE */
+/* ── MOBILE (tablet · ≤ 768px) ─────────────────────────────── */
 @media(max-width:768px){
   .topbar{padding:0 14px;height:48px;}
   .topbar-logo img{height:24px;}
+  .topbar-tag{font-size:9px;letter-spacing:.10em;padding:2px 8px;}
   .deck{top:48px;bottom:42px;}
-  .bottombar{height:42px;padding:0 12px;}
-  .slide{padding:12px 14px;gap:8px;}
-  .grid2,.grid3,.grid-asym,.kpis-4,.kpis-3,.nps-groups{grid-template-columns:1fr!important;}
+  .bottombar{height:42px;padding:0 12px 4px;}
+  .slide{padding:14px 16px;gap:8px;min-height:calc(100vh - 48px - 42px);}
+  .cover,.chapter{min-height:calc(100vh - 48px - 42px);}
+
+  /* Grids: 2-col → 1 col; kpis-4 → 2×2 para ficar mais compacto */
+  .grid2,.grid3,.grid-asym,.kpis-3,.nps-groups{grid-template-columns:1fr!important;}
+  .kpis-4{grid-template-columns:repeat(2,1fr)!important;}
+
   .hero-bg{display:none;}
+  .title{font-size:clamp(20px,5vw,28px);}
   .rank-row{grid-template-columns:minmax(90px,40%) 1fr 44px;}
+
+  /* Headline analítico compacto */
+  .headline-analitica{font-size:13.5px;padding:10px 12px 10px 30px;margin:0 0 10px;line-height:1.5;}
+  .headline-analitica::before{left:11px;top:11px;font-size:15px;}
+
+  /* Sumário: 2 col (override do @media de linha única acima) e drivers */
+  .toc-grid{grid-template-columns:1fr 1fr;}
+  .driver-row{gap:8px;padding:6px 0;}
+  .driver-lbl{flex:0 0 120px;font-size:11px;}
+  .driver-val{flex:0 0 38px;font-size:11px;}
+
+  /* Tabela do s-g0 — 6 colunas precisam de mais respiro lateral */
+  #s-g0 #g0-tabela table{font-size:11px!important;}
+  #s-g0 #g0-tabela td{padding:10px 3px!important;}
+  #s-g0 #g0-tabela th{padding:8px 3px!important;font-size:9px!important;}
+
+  /* Heatmap (s-d3): label column mais estreita pros tiles respirarem */
+  #s-d3 #d3-heatmap{grid-template-columns:minmax(80px,.9fr) repeat(4, 1fr)!important;gap:6px!important;}
+}
+
+/* ── MOBILE NARROW (smartphone vertical · ≤ 480px) ─────────── */
+@media(max-width:480px){
+  .topbar-tag{display:none;}
+  .slide{padding:12px 12px;}
+  .title{font-size:19px;}
+  .card{padding:10px 12px;border-radius:12px;}
+  .card h3{font-size:12px;}
+  .headline-analitica{font-size:12.5px;padding:9px 10px 9px 26px;}
+  .headline-analitica::before{left:9px;top:10px;font-size:13px;}
+
+  /* Sumário e KPIs-4 → 1 col em telas muito estreitas */
+  .toc-grid{grid-template-columns:1fr!important;}
+  .kpis-4{grid-template-columns:1fr!important;}
+
+  .driver-lbl{flex:0 0 95px!important;font-size:10px;}
+  .driver-val{flex:0 0 32px;font-size:10.5px;}
+  .diretriz{padding:10px 12px;font-size:11.5px;}
+  .diretriz-label{font-size:9px;}
+  .footnote{font-size:9px;}
+
+  /* Heatmap (s-d3) em 320–400px: fonte menor para caber 4 tiles */
+  #s-d3 #d3-heatmap{grid-template-columns:minmax(70px,.8fr) repeat(4, 1fr)!important;gap:4px!important;}
 }
 </style>
 </head>
@@ -626,37 +649,33 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">B · NPS</div>
   <h2 class="title">Net Promoter Score — BR-163</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Score e composição</h3>
-        <div style="display:flex;align-items:baseline;gap:14px;margin-top:8px">
-          <div class="nps-score" id="b1-score" style="color:var(--red)"></div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.4">Escala −100 a +100<br/><span style="font-size:10px">Onda 1 · base n = <span id="b1-n"></span></span></div>
-        </div>
-        <div class="nps-bar" id="b1-bar" style="margin-top:14px"></div>
-        <div class="nps-groups" id="b1-groups"></div>
+
+  <div class="headline-analitica" id="b1-headline"></div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:10px;flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Score e composição</h3>
+      <div style="display:flex;align-items:baseline;gap:14px;margin-top:12px">
+        <div class="nps-score" id="b1-score" style="color:var(--red)"></div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.4">Escala −100 a +100<br/><span style="font-size:10px">Onda 1 · base n = <span id="b1-n"></span></span></div>
       </div>
-      <div class="card">
-        <h3>Distribuição das notas (0–10)</h3>
-        <div class="nps-dist" id="b1-dist"></div>
-        <div style="display:flex;justify-content:space-between;margin-top:8px;padding:0 2px;font-size:9px;font-weight:700">
-          <span style="color:var(--red)">0 · não recomenda</span>
-          <span style="color:var(--muted)">5 · neutro</span>
-          <span style="color:var(--emerald)">10 · recomenda com certeza</span>
-        </div>
+      <div class="nps-bar" id="b1-bar" style="margin-top:18px"></div>
+      <div class="nps-groups" id="b1-groups" style="margin-top:14px"></div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;min-width:0">
+      <h3>Distribuição das notas (0–10)</h3>
+      <div id="b1-dist" style="margin-top:12px"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;padding:0 2px;font-size:11px;font-weight:700;flex-shrink:0">
+        <span style="color:var(--red)">0 · não recomenda</span>
+        <span style="color:var(--muted)">5 · neutro</span>
+        <span style="color:var(--emerald)">10 · recomenda com certeza</span>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="b1-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="b1-diretriz"></div>
-      </div>
-    </div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="b1-diretriz"></div>
   </div>
 </section>
 
@@ -665,6 +684,10 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">B · Vozes · Detratores</div>
   <h2 class="title">Por que os detratores dão nota baixa</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica">
+    <span>Três temas explicam <b>51% das críticas</b>: <b class='hl-red'>Segurança (19%)</b>, <b class='hl-red'>Pavimento (16%)</b> e <b class='hl-red'>Obras em andamento (16%)</b> — todos acionáveis. <b class='hl-amber'>Ausência de alternativa (11%)</b> marca um segmento estrutural: ~20 detratores cativos que dificilmente mudarão mesmo com melhorias.</span>
+  </div>
 
   <div style="display:flex;gap:12px;flex:1;min-height:0">
     <!-- Coluna esquerda: barras de temas clicáveis -->
@@ -698,6 +721,10 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <h2 class="title">Por que os neutros ainda não recomendam</h2>
   <div class="rule"></div>
 
+  <div class="headline-analitica">
+    <span>Mais da <b class='hl-green'>metade do discurso neutro é sobre melhora percebida</b> (29% trajetória de melhoria + 15% obras em curso + 11% socorro). Base que <b class='hl-ink'>já reconhece valor</b> — aguarda continuidade da entrega para consolidar em recomendação.</span>
+  </div>
+
   <div style="display:flex;gap:12px;flex:1;min-height:0">
     <!-- Coluna esquerda: barras de temas clicáveis -->
     <div class="card" style="flex:1;min-width:0;display:flex;flex-direction:column">
@@ -730,6 +757,10 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <h2 class="title">Por que os promotores recomendam a rodovia</h2>
   <div class="rule"></div>
 
+  <div class="headline-analitica">
+    <span>Dois argumentos explicam <b>68% das recomendações</b>: <b class='hl-green'>trajetória de melhoria (40%)</b> e <b class='hl-green'>serviços de socorro (28%)</b>. Não é sobre a rodovia — é sobre <b class='hl-ink'>o que a Nova Rota construiu</b>.</span>
+  </div>
+
   <div style="display:flex;gap:12px;flex:1;min-height:0">
     <!-- Coluna esquerda: barras de temas clicáveis -->
     <div class="card" style="flex:1;min-width:0;display:flex;flex-direction:column">
@@ -761,37 +792,33 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">B · Satisfação Geral</div>
   <h2 class="title">Satisfação geral com a BR-163</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Score e composição</h3>
-        <div style="display:flex;align-items:baseline;gap:14px;margin-top:8px">
-          <div class="nps-score" id="b2-media"></div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.4">Escala 1 a 5<br/><span style="font-size:10px">Onda 1 · base n = <span id="b2-n"></span></span></div>
-        </div>
-        <div class="nps-bar" id="b2-bar" style="margin-top:14px"></div>
-        <div class="nps-groups" id="b2-groups"></div>
+
+  <div class="headline-analitica" id="b2-headline"></div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:10px;flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Score e composição</h3>
+      <div style="display:flex;align-items:baseline;gap:14px;margin-top:12px">
+        <div class="nps-score" id="b2-media"></div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.4">Escala 1 a 5<br/><span style="font-size:10px">Onda 1 · base n = <span id="b2-n"></span></span></div>
       </div>
-      <div class="card">
-        <h3>Distribuição das notas (1–5)</h3>
-        <div class="nps-dist" id="b2-dist"></div>
-        <div style="display:flex;justify-content:space-between;margin-top:8px;padding:0 2px;font-size:9px;font-weight:700">
-          <span style="color:var(--red)">1 · muito insatisfeito</span>
-          <span style="color:var(--muted)">3 · neutro</span>
-          <span style="color:var(--emerald)">5 · muito satisfeito</span>
-        </div>
+      <div class="nps-bar" id="b2-bar" style="margin-top:18px"></div>
+      <div class="nps-groups" id="b2-groups" style="margin-top:14px"></div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;min-width:0">
+      <h3>Distribuição das notas (1–5)</h3>
+      <div id="b2-dist" style="margin-top:12px"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;padding:0 2px;font-size:11px;font-weight:700;flex-shrink:0">
+        <span style="color:var(--red)">1 · muito insatisfeito</span>
+        <span style="color:var(--muted)">3 · neutro</span>
+        <span style="color:var(--emerald)">5 · muito satisfeito</span>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="b2-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="b2-diretriz"></div>
-      </div>
-    </div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="b2-diretriz"></div>
   </div>
 </section>
 
@@ -800,37 +827,33 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">B · Evolução Percebida</div>
   <h2 class="title">Como a rodovia evoluiu nos últimos 2 anos</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Score e composição</h3>
-        <div style="display:flex;align-items:baseline;gap:14px;margin-top:8px">
-          <div class="nps-score" id="b3-melhorou" style="color:var(--emerald)"></div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.4">vê melhoria em 2 anos<br/><span style="font-size:10px">Onda 1 · base n = <span id="b3-n"></span> (uso ≥ 2 anos)</span></div>
-        </div>
-        <div class="nps-bar" id="b3-bar" style="margin-top:14px"></div>
-        <div class="nps-groups" id="b3-groups"></div>
+
+  <div class="headline-analitica" id="b3-headline"></div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:10px;flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Score e composição</h3>
+      <div style="display:flex;align-items:baseline;gap:14px;margin-top:12px">
+        <div class="nps-score" id="b3-melhorou" style="color:var(--emerald)"></div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.4">vê melhoria em 2 anos<br/><span style="font-size:10px">Onda 1 · base n = <span id="b3-n"></span> (uso ≥ 2 anos)</span></div>
       </div>
-      <div class="card">
-        <h3>Distribuição das respostas</h3>
-        <div class="nps-dist" id="b3-dist"></div>
-        <div style="display:flex;justify-content:space-between;margin-top:8px;padding:0 2px;font-size:9px;font-weight:700">
-          <span style="color:var(--red)">1 · muito pior</span>
-          <span style="color:var(--muted)">3 · igual</span>
-          <span style="color:var(--emerald)">5 · muito melhor</span>
-        </div>
+      <div class="nps-bar" id="b3-bar" style="margin-top:18px"></div>
+      <div class="nps-groups" id="b3-groups" style="margin-top:14px"></div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;min-width:0">
+      <h3>Distribuição das respostas</h3>
+      <div id="b3-dist" style="margin-top:12px"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;padding:0 2px;font-size:11px;font-weight:700;flex-shrink:0">
+        <span style="color:var(--red)">1 · muito pior</span>
+        <span style="color:var(--muted)">3 · igual</span>
+        <span style="color:var(--emerald)">5 · muito melhor</span>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="b3-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="b3-diretriz"></div>
-      </div>
-    </div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="b3-diretriz"></div>
   </div>
 </section>
 
@@ -848,6 +871,9 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">C · Infraestrutura e Segurança</div>
   <h2 class="title">Painel de indicadores — rodovia</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica" id="c1-headline"></div>
+
   <div class="grid3" style="flex-shrink:0">
     <div class="card" id="c1-card-pav"></div>
     <div class="card" id="c1-card-sin"></div>
@@ -869,37 +895,33 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">C · Segurança</div>
   <h2 class="title">Segurança: o indicador mais crítico</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Score e composição</h3>
-        <div style="display:flex;align-items:baseline;gap:14px;margin-top:8px">
-          <div class="nps-score" id="c2-media"></div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.4">Escala 1 a 5<br/><span style="font-size:10px">Onda 1 · base n = <span id="c2-n"></span></span></div>
-        </div>
-        <div class="nps-bar" id="c2-bar" style="margin-top:14px"></div>
-        <div class="nps-groups" id="c2-groups"></div>
+
+  <div class="headline-analitica" id="c2-headline"></div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:10px;flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Score e composição</h3>
+      <div style="display:flex;align-items:baseline;gap:14px;margin-top:12px">
+        <div class="nps-score" id="c2-media"></div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.4">Escala 1 a 5<br/><span style="font-size:10px">Onda 1 · base n = <span id="c2-n"></span></span></div>
       </div>
-      <div class="card">
-        <h3>Distribuição das notas (1–5)</h3>
-        <div class="nps-dist" id="c2-dist"></div>
-        <div style="display:flex;justify-content:space-between;margin-top:8px;padding:0 2px;font-size:9px;font-weight:700">
-          <span style="color:var(--red)">1 · muito inseguro</span>
-          <span style="color:var(--muted)">3 · neutro</span>
-          <span style="color:var(--emerald)">5 · muito seguro</span>
-        </div>
+      <div class="nps-bar" id="c2-bar" style="margin-top:18px"></div>
+      <div class="nps-groups" id="c2-groups" style="margin-top:14px"></div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;min-width:0">
+      <h3>Distribuição das notas (1–5)</h3>
+      <div id="c2-dist" style="margin-top:12px"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;padding:0 2px;font-size:11px;font-weight:700;flex-shrink:0">
+        <span style="color:var(--red)">1 · muito inseguro</span>
+        <span style="color:var(--muted)">3 · neutro</span>
+        <span style="color:var(--emerald)">5 · muito seguro</span>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="c2-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="c2-diretriz"></div>
-      </div>
-    </div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="c2-diretriz"></div>
   </div>
 </section>
 
@@ -908,21 +930,17 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">C · Prioridades</div>
   <h2 class="title">O que precisa melhorar primeiro</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div class="card" style="flex:1;display:flex;flex-direction:column">
-      <h3>Ranking de prioridades espontâneas <span class="ttl-n">(n = 385)</span></h3>
-      <div id="c3-ranking" style="margin-top:10px;flex:1;min-height:0;display:flex;flex-direction:column"></div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="c3-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="c3-diretriz"></div>
-      </div>
-    </div>
+
+  <div class="headline-analitica" id="c3-headline"></div>
+
+  <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <h3>Ranking de prioridades espontâneas <span class="ttl-n">(n = 385)</span></h3>
+    <div id="c3-ranking" style="margin-top:10px;flex:1;min-height:0"></div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="c3-diretriz"></div>
   </div>
 </section>
 
@@ -940,32 +958,24 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">D · Obras — Responsabilidade</div>
   <h2 class="title">Quem o usuário acha que faz as obras</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">
-          <h3 style="margin-bottom:0">Exposição às obras</h3>
-          <span style="font-size:11px;color:var(--muted)">últimos 30 dias</span>
-        </div>
-        <div id="d1-exposicao" style="margin-top:8px"></div>
-      </div>
-      <div class="card" style="flex:1">
-        <h3>Atribuição de responsabilidade pelas obras <span style="font-size:10px;color:var(--muted);font-weight:500">(base: passaram por obras, n = <span id="d1-n"></span>)</span></h3>
-        <div id="d1-atribuicao" style="margin-top:10px"></div>
-      </div>
+
+  <div class="headline-analitica" id="d1-headline"></div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:10px;flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Exposição às obras <span class="ttl-n">(últimos 30 dias)</span></h3>
+      <div id="d1-exposicao" style="margin-top:12px;flex:1;min-height:0;display:flex;align-items:center;justify-content:center"></div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="d1-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="d1-diretriz"></div>
-      </div>
+    <div class="card" style="display:flex;flex-direction:column;min-width:0">
+      <h3>Atribuição de responsabilidade pelas obras <span class="ttl-n">(base: passaram por obras, n = <span id="d1-n"></span>)</span></h3>
+      <div id="d1-atribuicao" style="margin-top:12px"></div>
     </div>
   </div>
-  <p class="footnote">"Na sua percepção, quem é o principal responsável pelas obras?" · RU · base: passaram por obras nos últimos 30 dias.</p>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="d1-diretriz"></div>
+  </div>
 </section>
 
 <!-- ══ SLIDE D2 — PAINEL OBRAS ════════════════════════════ -->
@@ -973,6 +983,9 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">D · Obras — Avaliação</div>
   <h2 class="title">Painel de avaliação das obras</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica" id="d2-headline"></div>
+
   <div class="grid2" style="flex:1;min-height:0">
     <div class="card" id="d2-card-clareza"></div>
     <div class="card" id="d2-card-seg"></div>
@@ -990,21 +1003,17 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">D · Obras × Frequência</div>
   <h2 class="title">Avaliação das obras por frequência de uso</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div class="card" style="flex:1;display:flex;flex-direction:column;min-height:0">
-      <h3>Média dos indicadores de obras por frequência de uso</h3>
-      <div id="d3-heatmap" style="flex:1;min-height:0;display:grid;margin-top:10px"></div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="d3-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="d3-diretriz"></div>
-      </div>
-    </div>
+
+  <div class="headline-analitica" id="d3-headline"></div>
+
+  <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <h3>Média dos indicadores de obras por frequência de uso</h3>
+    <div id="d3-heatmap" style="flex:1;min-height:0;display:grid;margin-top:10px"></div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="d3-diretriz"></div>
   </div>
   <p class="footnote">Médias escala 1–5 · base: passaram por obras nos últimos 30 dias · cruzamento por Q07.</p>
 </section>
@@ -1023,32 +1032,23 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">E · Serviços — Alcance</div>
   <h2 class="title">Quem usa os serviços — e quais</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Score e composição</h3>
-        <div style="display:flex;align-items:baseline;gap:14px;margin-top:8px">
-          <div class="nps-score" id="e1-pct-usou" style="color:var(--emerald)"></div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.4">usaram ao menos um serviço da concessionária<br/><span style="font-size:10px">Onda 1 · base n = <span id="e1-n-total"></span> · usaram n = <span id="e1-n-usou"></span></span></div>
-        </div>
-        <div class="nps-bar" id="e1-bar" style="margin-top:14px"></div>
-        <div class="nps-groups" id="e1-groups" style="grid-template-columns:1fr 1fr"></div>
-      </div>
-      <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column">
-        <h3>Quais serviços foram utilizados <span class="ttl-n">(RM · base: n = <span id="e1-n-base"></span> que usaram)</span></h3>
-        <div id="e1-quais" style="margin-top:10px;flex:1;min-height:0"></div>
-      </div>
+
+  <div class="headline-analitica" id="e1-headline"></div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:10px;flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Alcance dos serviços <span class="ttl-n">(base: n = <span id="e1-n-total"></span>)</span></h3>
+      <div id="e1-exposicao" style="margin-top:12px;flex:1;min-height:0;display:flex;align-items:center;justify-content:center"></div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="e1-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="e1-diretriz"></div>
-      </div>
+    <div class="card" style="display:flex;flex-direction:column;min-width:0">
+      <h3>Quais serviços foram utilizados <span class="ttl-n">(RM · base: n = <span id="e1-n-base"></span> que usaram)</span></h3>
+      <div id="e1-quais" style="margin-top:10px;flex:1;min-height:0"></div>
     </div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="e1-diretriz"></div>
   </div>
 </section>
 
@@ -1057,6 +1057,9 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">E · Serviços — Avaliação</div>
   <h2 class="title">Avaliação dos serviços utilizados</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica" id="e2-headline"></div>
+
   <div class="grid2" style="flex:1;min-height:0">
     <div class="card" id="e2-card-guincho"></div>
     <div class="card" id="e2-card-ambulancia"></div>
@@ -1083,21 +1086,17 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">F · Comunicação — Canais</div>
   <h2 class="title">Conhecimento dos canais da Nova Rota</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div class="card" style="flex:1">
-      <h3>Canais conhecidos espontaneamente <span id="ttl-f1" style="font-size:10px;color:var(--muted);font-weight:500">(RM · n = 385)</span></h3>
-      <div id="f1-canais" style="margin-top:10px"></div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="f1-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="f1-diretriz"></div>
-      </div>
-    </div>
+
+  <div class="headline-analitica" id="f1-headline"></div>
+
+  <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <h3>Canais conhecidos espontaneamente <span class="ttl-n">(RM · n = 385)</span></h3>
+    <div id="f1-canais" style="margin-top:10px;flex:1;min-height:0"></div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="f1-diretriz"></div>
   </div>
 </section>
 
@@ -1107,20 +1106,7 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <h2 class="title">Atendimento e confiança nas informações</h2>
   <div class="rule"></div>
 
-  <!-- Faixa de contexto: quem entrou em contato (define a base do CSAT/CES) -->
-  <div class="card" style="flex-shrink:0;border-top:3px solid var(--lime);background:rgba(197,217,46,.04);margin-bottom:0">
-    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-      <div style="display:flex;align-items:baseline;gap:8px">
-        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--lime-txt)">Base de atendimento</span>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:8px">
-        <span style="font-size:clamp(22px,2.4vw,32px);font-weight:800;color:var(--lime-txt);line-height:1" id="f2-contato-pct"></span>
-        <span style="font-size:12px;color:var(--ink);font-weight:600">dos entrevistados entraram em contato com a Nova Rota</span>
-        <span style="font-size:11px;color:var(--muted)" id="f2-contato-n"></span>
-      </div>
-      <span style="margin-left:auto;font-size:11px;color:var(--muted);font-style:italic">CSAT e CES medidos neste grupo · Confiança medida em toda a base (n = 385)</span>
-    </div>
-  </div>
+  <div class="headline-analitica" id="f2-headline"></div>
 
   <!-- Linha 1: 3 indicator cards -->
   <div class="grid3" style="flex-shrink:0">
@@ -1148,21 +1134,17 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">F · Comunicação — Canal Preferido</div>
   <h2 class="title">Como o usuário quer ser informado</h2>
   <div class="rule"></div>
-  <div class="grid-asym" style="flex:1;min-height:0">
-    <div class="card" style="flex:1">
-      <h3>Canal preferido para receber informações <span id="ttl-f3" style="font-size:10px;color:var(--muted);font-weight:500">(RU · n = 385)</span></h3>
-      <div id="f3-canal" style="margin-top:10px"></div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="f3-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="f3-diretriz"></div>
-      </div>
-    </div>
+
+  <div class="headline-analitica" id="f3-headline"></div>
+
+  <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <h3>Canal preferido para receber informações <span class="ttl-n">(RU · n = 385)</span></h3>
+    <div id="f3-canal" style="margin-top:10px;flex:1;min-height:0"></div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="f3-diretriz"></div>
   </div>
 </section>
 
@@ -1180,24 +1162,17 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">G · Bivariada</div>
   <h2 class="title">Quem mais conhece a rodovia é o mais crítico — e o mais informado</h2>
   <div class="rule"></div>
-  <div class="grid2" style="flex:1;min-height:0">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Indicadores por tempo de uso</h3>
-        <p style="font-size:10.5px;color:var(--muted);margin:4px 0 10px;line-height:1.4">Quatro faixas de usuários. Base de evolução só se aplica a 2+ anos de uso (pergunta condicional).</p>
-        <div id="g0-tabela" style="margin-top:8px"></div>
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="g0-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="g0-diretriz"></div>
-      </div>
-    </div>
+
+  <div class="headline-analitica" id="g0-headline"></div>
+
+  <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <h3>Indicadores por tempo de uso <span class="ttl-n">(n = 385 · evolução condicional a 2+ anos)</span></h3>
+    <div id="g0-tabela" style="margin-top:8px;flex:1;min-height:0"></div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="g0-diretriz"></div>
   </div>
   <p class="footnote" id="fn-g0">Base: 385 entrevistas · faixas Q13 · NPS (Q38 recodificada) · confiança (Q35, 1–5) · evolução percebida (Q14, condicional a 2+ anos de uso).</p>
 </section>
@@ -1207,47 +1182,44 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">G · Análise de Drivers</div>
   <h2 class="title">O que move a satisfação geral</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica" id="i1-headline"></div>
+
   <div class="grid-asym" style="flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Influência de cada item na satisfação geral</h3>
+      <p style="font-size:10.5px;color:var(--muted);margin:4px 0 10px;line-height:1.4">Barras = coeficiente padronizado (β) do modelo OLS. Cinza = efeito não-significativo (p≥0,05).</p>
+      <div id="i1-drivers" style="flex:1;min-height:0"></div>
+    </div>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Influência de cada item na satisfação geral</h3>
-        <p style="font-size:10.5px;color:var(--muted);margin:4px 0 10px;line-height:1.4">Barras mais longas = maior efeito independente. Itens em cinza têm efeito indireto — operam via pavimento.</p>
-        <div id="i1-drivers"></div>
-      </div>
       <div class="card" style="flex-shrink:0">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-          <div style="text-align:center">
-            <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Variação explicada</div>
-            <div style="font-size:22px;font-weight:800;color:var(--dark)" id="i1-r2"></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Variação explicada (R²)</div>
+            <div style="font-size:26px;font-weight:800;color:var(--dark);line-height:1.1" id="i1-r2"></div>
           </div>
-          <div style="text-align:center">
-            <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Drivers significativos</div>
-            <div style="font-size:22px;font-weight:800;color:var(--lime-txt)">2 de 8</div>
+          <div>
+            <div style="font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Drivers significativos</div>
+            <div style="font-size:26px;font-weight:800;color:var(--lime-txt);line-height:1.1" id="i1-sig"></div>
           </div>
-          <div style="text-align:center">
-            <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Driver dominante</div>
-            <div style="font-size:22px;font-weight:800;color:var(--dark)">Pavimento</div>
+          <div>
+            <div style="font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Driver dominante</div>
+            <div style="font-size:22px;font-weight:800;color:var(--dark);line-height:1.1" id="i1-dom"></div>
           </div>
         </div>
       </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card">
-        <h3>Como ler este gráfico</h3>
-        <p style="font-size:11.5px;line-height:1.65;color:var(--ink);margin-top:6px">Cada barra mostra o quanto a melhora naquele item tende a elevar a satisfação geral — <strong>mantendo todos os outros fatores iguais</strong>. Isso elimina o efeito de "um fator puxar o outro" e isola a contribuição real de cada dimensão.</p>
-        <p style="font-size:11.5px;line-height:1.65;color:var(--muted);margin-top:8px">Itens em cinza correlacionam com satisfação, mas não têm efeito próprio no modelo conjunto — seu impacto já está capturado pelo pavimento, que é o fator central.</p>
-      </div>
       <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="i1-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="i1-diretriz"></div>
+        <h3>Como ler</h3>
+        <p style="font-size:11.5px;line-height:1.6;color:var(--ink);margin-top:6px">Cada barra mostra o quanto a melhora naquele item tende a elevar a satisfação geral — <strong>mantendo todos os outros fatores iguais</strong>. Isola a contribuição independente de cada dimensão, eliminando o efeito de um fator "puxar" outro.</p>
       </div>
     </div>
   </div>
-  <p class="footnote" id="fn-g1">Regressão OLS · n=356 (listwise) · R²=0,541 · variável dependente: Q28 — satisfação geral (1–5).</p>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="i1-diretriz"></div>
+  </div>
+  <p class="footnote" id="fn-g1"></p>
 </section>
 
 <!-- ══ SLIDE G2 — DRIVERS NPS × SATISFAÇÃO ═══════════════════ -->
@@ -1255,35 +1227,32 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">G · Análise de Drivers</div>
   <h2 class="title">O que move o NPS — e por que é diferente</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica" id="i2-headline"></div>
+
   <div class="grid2" style="flex:1;min-height:0">
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3>Influência de cada item no NPS</h3>
+      <p style="font-size:10.5px;color:var(--muted);margin:4px 0 10px;line-height:1.4">Barras = coeficiente padronizado (β). Cinza = efeito não-significativo (p≥0,05). ★ p&lt;0,05 · ★★ p&lt;0,01 · ★★★ p&lt;0,001.</p>
+      <div id="i2-drivers-nps" style="flex:1;min-height:0"></div>
+    </div>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex:1">
-        <h3>Influência de cada item no NPS</h3>
-        <p style="font-size:10.5px;color:var(--muted);margin:4px 0 10px;line-height:1.4">5 itens com efeito independente significativo — perfil muito mais distribuído que na satisfação.</p>
-        <div id="i2-drivers-nps"></div>
-        <p style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5">★ p&lt;0,05 · ★★ p&lt;0,01 · ★★★ p&lt;0,001 · Itens em cinza: efeito não significativo<br/><strong style="color:var(--red)">↓ Efeito negativo:</strong> quanto maior o impacto percebido das obras no tempo de viagem, menor o NPS — o atraso é o principal custo experiencial das obras.</p>
-      </div>
       <div class="card" style="flex-shrink:0;border-left:4px solid var(--lime)">
         <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--lime-txt);margin-bottom:6px">Achado central</div>
         <p style="font-size:12px;line-height:1.6;color:var(--ink)" id="i2-achado"></p>
       </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="flex-shrink:0">
+      <div class="card" style="flex:1;display:flex;flex-direction:column">
         <h3>Comparativo: satisfação × NPS</h3>
-        <div id="i2-comparativo" style="margin-top:10px"></div>
-      </div>
-      <div class="card" style="flex:1">
-        <h3>Leitura do dado</h3>
-        <p style="font-size:12px;line-height:1.65;color:var(--ink);margin-top:6px" id="i2-leitura"></p>
-      </div>
-      <div class="card">
-        <div class="diretriz-label">Diretriz analítica</div>
-        <div class="diretriz" style="margin-top:4px" id="i2-diretriz"></div>
+        <div id="i2-comparativo" style="margin-top:10px;flex:1;min-height:0"></div>
       </div>
     </div>
   </div>
-  <p class="footnote" id="fn-g2">Regressão OLS · n=356 · R²=0,519 para NPS · R²=0,541 para satisfação · ★ p&lt;0,05 · ★★ p&lt;0,01 · ★★★ p&lt;0,001.</p>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0">
+    <div class="diretriz-label">Diretriz analítica</div>
+    <div class="diretriz" style="margin-top:4px" id="i2-diretriz"></div>
+  </div>
+  <p class="footnote" id="fn-g2"></p>
 </section>
 
 <!-- ══ CHAPTER H ════════════════════════════════════════════ -->
@@ -1300,35 +1269,39 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">H · Síntese</div>
   <h2 class="title">O que a Onda 1 revela</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica" id="h1-headline"></div>
+
   <div class="grid2" style="flex:1;min-height:0">
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="border-left:4px solid var(--red)">
+      <div class="card" style="border-left:4px solid var(--red);flex:1">
         <h3>🔴 Ponto crítico — Segurança</h3>
         <p style="font-size:12px;line-height:1.6;color:var(--ink);margin-top:6px" id="h1-crit1"></p>
       </div>
-      <div class="card" style="border-left:4px solid var(--amber)">
+      <div class="card" style="border-left:4px solid var(--amber);flex:1">
         <h3>🟡 Atenção — Atribuição de responsabilidade</h3>
         <p style="font-size:12px;line-height:1.6;color:var(--ink);margin-top:6px" id="h1-crit2"></p>
       </div>
-      <div class="card" style="border-left:4px solid var(--amber)">
+      <div class="card" style="border-left:4px solid var(--amber);flex:1">
         <h3>🟡 Atenção — Comunicação e canais</h3>
         <p style="font-size:12px;line-height:1.6;color:var(--ink);margin-top:6px" id="h1-crit3"></p>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card" style="border-left:4px solid var(--emerald)">
+      <div class="card" style="border-left:4px solid var(--emerald);flex:1">
         <h3>🟢 Ativo — Serviços operacionais</h3>
         <p style="font-size:12px;line-height:1.6;color:var(--ink);margin-top:6px" id="h1-pos1"></p>
       </div>
-      <div class="card" style="border-left:4px solid var(--emerald)">
+      <div class="card" style="border-left:4px solid var(--emerald);flex:1">
         <h3>🟢 Ativo — Trajetória de melhoria</h3>
         <p style="font-size:12px;line-height:1.6;color:var(--ink);margin-top:6px" id="h1-pos2"></p>
       </div>
-      <div class="card" style="background:var(--dark);border:0">
-        <div class="diretriz-label" style="color:var(--lime);margin-bottom:6px">Enquadramento geral</div>
-        <p style="font-size:12px;line-height:1.65;color:rgba(255,255,255,.8)" id="h1-enquadramento"></p>
-      </div>
     </div>
+  </div>
+
+  <div class="card" style="margin-top:10px;flex-shrink:0;background:var(--dark);border:0">
+    <div class="diretriz-label" style="color:var(--lime);margin-bottom:6px">Enquadramento geral</div>
+    <p style="font-size:12px;line-height:1.65;color:rgba(255,255,255,.88)" id="h1-enquadramento"></p>
   </div>
   <p class="footnote">Opinião Informação Estratégica · Onda 1 · 2026.</p>
 </section>
@@ -1338,6 +1311,9 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   <div class="kicker">H · Monitoramento</div>
   <h2 class="title">Agenda das próximas ondas</h2>
   <div class="rule"></div>
+
+  <div class="headline-analitica" id="h2-headline"></div>
+
   <div class="grid3" style="flex:1;min-height:0;align-items:start">
     <div class="card" style="border-top:3px solid var(--lime)">
       <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--lime-txt);margin-bottom:8px">Onda 1 · Concluída</div>
@@ -5973,52 +5949,57 @@ const D = {
     a3_leitura: "O usuário típico é um profissional do transporte de carga: <b class='hl-ink'>77,9% conduzem carreta, bitrem, rodotrem ou caminhão</b>. Entre esses, <b>73% são funcionários de transportadoras</b> — não autônomos. A carga espelha a vocação econômica de MT: <b class='hl-green'>grãos lideram com folga (54%)</b>, seguidos por cargas industriais (25%) e combustível (12%). As três categorias somam <b>mais de 90% do movimento de carga profissional</b>.",
     a4_leitura: "A BR-163 é uma via de uso intenso e continuado. <b>66% trafegam diária ou semanalmente</b>, e <b>74% usam há mais de 5 anos</b> — base com referência temporal sólida para avaliar mudanças. <b>73% não se limitam a um trecho específico</b>, reforçando o papel da rodovia como <b class='hl-ink'>eixo contínuo de escoamento</b> entre o sul de Mato Grosso e o norte produtivo.",
 
-    b1_leitura: "O NPS da BR-163 foi <b class='hl-red'>−34,3 pontos</b>: <b class='hl-red'>48,1% detratores</b>, 38,2% neutros e apenas <b>13,8% promotores</b> — cerca de <b class='hl-red'>3,5 detratores para cada promotor</b>. Metade das respostas se concentra na faixa 5–8 (nota 5: 19,7% · nota 7: 17,7% · nota 8: 20,5%), sinalizando que a maior parte da base está em zona de transição. O retrato é de uma rodovia em <b class='hl-red'>território crítico de recomendação</b>, com o <b class='hl-amber'>bloco de neutros como a principal reserva de conversão</b> para as próximas ondas.",
-    b1_diretriz: "A <b class='hl-amber'>oportunidade central está nos neutros</b> — 38,2% da base que já reconhece o funcionamento da rodovia mas ainda não a recomenda. Somados aos detratores com notas 5 e 6, concentra-se aí o maior espaço de ganho. As alavancas que mais diretamente movimentam essa base, conforme a análise de drivers à frente, são <b class='hl-green'>pavimento</b> e <b class='hl-green'>ritmo das obras</b>.",
+    b1_headline: "NPS de <b class='hl-red'>−34,3 pontos</b>: quase metade da base (<b class='hl-red'>48,1%</b>) é detratora e apenas <b>13,8%</b> recomenda — <b class='hl-red'>3,5 detratores para cada promotor</b>. Metade das respostas se concentra na faixa 5–8, sinalizando que a maior parte da base está em <b class='hl-amber'>zona de transição</b>.",
+    b1_diretriz: "A <b class='hl-amber'>oportunidade central está nos neutros</b> (38,2%) somados aos detratores de notas altas (5 e 6) — é aí que se concentra o maior estoque de conversão. As alavancas que movem essa base, conforme a análise de drivers à frente, são <b class='hl-green'>pavimento</b> e <b class='hl-green'>ritmo das obras</b>. Meta tática da próxima onda: <b class='hl-ink'>mover a faixa 5–7 para 7–8</b>, deslocando massa crítica do grupo cinza para o verde. Monitorar se o movimento é uniforme ou enviesado por frequência de uso.",
 
-    b2a_diretriz: "Três temas dominam a nota baixa: <b class='hl-red'>Segurança (19%), Pavimento (16%) e Obras em andamento (16%)</b> — somados, 51% das reclamações. Todos <b class='hl-ink'>acionáveis por intervenção operacional</b>. A quarta categoria — <b class='hl-amber'>Ausência de alternativa (11%)</b> — é estrutural: usuários cativos que dão nota baixa por não terem outra rota, não por insatisfação. Representa o <b class='hl-amber'>teto prático de conversão do NPS</b>: cerca de 20 entrevistados dificilmente mudarão de classificação, mesmo com melhorias.",
-    b2b_diretriz: "Os neutros falam de <b class='hl-green'>transformação</b>: <b>29% citam a trajetória de melhoria</b> — &quot;já esteve bem pior&quot;, &quot;está ficando bom&quot;. Outros 15% mencionam obras em andamento sem tom negativo, e 11% citam positivamente os serviços de socorro. Mais da <b class='hl-green'>metade do discurso neutro é sobre melhora percebida</b> — base que já reconhece valor e <b class='hl-amber'>aguarda continuidade da entrega</b>. Maior potencial de conversão para promotor se as obras avançarem no ritmo esperado.",
-    b2c_diretriz: "Os promotores concentram o discurso em <b class='hl-green'>dois argumentos: trajetória de melhoria (40%) e serviços de socorro (28%)</b> — juntos, 68% das razões para recomendar. Não é sobre a rodovia em si; é sobre o que a Nova Rota construiu: <b class='hl-green'>transformação visível e atendimento eficaz na hora do apuro</b>. Dois ativos narrativos já internalizados — amplificá-los na comunicação institucional converte argumentos implícitos em mensagem explícita.",
+    b2a_diretriz: "As três críticas dominantes desenham a <b class='hl-ink'>agenda operacional da onda</b>: <b class='hl-red'>pavimento e obras</b> puxam segurança por arrasto (risco percebido e pare-e-siga estão ligados a trechos em intervenção). Comunicar entregas concretas nesses eixos reduz diretamente a massa crítica. O <b class='hl-amber'>segmento cativo</b> (teto de ~20 detratores) é constante estatística — calibrar metas de NPS tratando-o como piso estrutural, não como alvo de conversão.",
+    b2b_diretriz: "Os neutros são o <b class='hl-green'>maior estoque de conversão para promotor</b>. Cada obra finalizada e comunicada converte argumento latente em recomendação ativa. A comunicação deve narrar a <b class='hl-ink'>progressão</b> — antes × depois, km entregues, obras concluídas — reforçando a percepção de melhoria já presente no discurso deste grupo. Ritmo de entrega × ritmo de comunicação: os dois precisam andar juntos para consolidar a migração.",
+    b2c_diretriz: "<b class='hl-ink'>Amplificar os dois ativos na comunicação institucional</b> converte argumentos implícitos dos promotores em narrativa corporativa explícita. <b class='hl-green'>Progresso visível</b> como âncora temporal (antes × agora, kms entregues, obras finalizadas). <b class='hl-green'>Atendimento na hora do apuro</b> como prova de presença — amplificar a visibilidade de guincho e ambulância nos canais em rota. O que o usuário já diz sobre a Nova Rota vira mensagem corporativa consistente.",
 
-    b2_leitura: "A satisfação geral foi <b class='hl-amber'>3,26/5</b>. Positivas (notas 4 e 5) somam 39,7% e negativas (1 e 2), 16,4%. O dado mais relevante é a <b class='hl-amber'>concentração na nota 3: 43,9% da base</b> — reconhecimento de que o serviço funciona, mas ainda sem os atributos que caracterizam experiência efetivamente positiva.",
+    b2_headline: "Satisfação geral: média <b class='hl-amber'>3,26/5</b>, com <b class='hl-amber'>43,9% concentrados na nota 3</b> — reconhecimento de que o serviço funciona, sem os atributos de experiência efetivamente positiva. Positivas (4 e 5) somam <b>39,7%</b>; negativas (1 e 2), 16,4%.",
     b2_diretriz: "A oportunidade está no <b class='hl-amber'>bloco da nota 3</b>: maior grupo da base, posicionado na transição entre &quot;aceitável&quot; e &quot;satisfatório&quot;. Melhorias perceptíveis tendem a convertê-lo diretamente para avaliação positiva. Os dois fatores de maior peso sobre a satisfação são a <b class='hl-green'>qualidade do pavimento</b> (dominante) e o <b class='hl-green'>ritmo das obras</b> — o caminho mais direto para mover o indicador.",
 
-    b3_leitura: "Entre os <b>349 usuários com 2+ anos</b> de familiaridade com a BR-163, <b class='hl-green'>86,2% percebem melhoria nos últimos dois anos</b>: 22,9% &quot;muito melhor&quot; + 63,3% &quot;um pouco melhor&quot;. Apenas 6,9% percebem piora. É a <b class='hl-green'>leitura mais positiva do estudo</b> e o dado mais eloquente sobre a direção do trabalho que vem sendo realizado.",
+    b3_headline: "Entre os <b>349 usuários com 2+ anos</b> de familiaridade com a BR-163, <b class='hl-green'>86,2% percebem melhoria nos últimos 2 anos</b> (22,9% muito melhor + 63,3% um pouco melhor). Apenas 6,9% percebem piora — <b class='hl-green'>leitura mais positiva do estudo</b>.",
     b3_diretriz: "A percepção de melhoria é o <b class='hl-green'>principal ativo de comunicação institucional</b> da concessionária. Traduz em números uma avaliação que o usuário carrega independentemente das críticas sobre o momento atual — é <b class='hl-ink'>a base narrativa ideal para a comunicação externa</b>, contrapondo a leitura de &quot;rodovia que nunca melhora&quot; que aparece em parte das vozes detratoras.",
 
-    c1_diretriz: "Três indicadores estruturais da experiência física. <b class='hl-green'>Sinalização (3,51) atravessa o limiar positivo</b>: mais da metade avalia como boa. <b class='hl-amber'>Pavimento (3,21)</b> em patamar intermediário — funcional mas sem atributos claramente positivos. <b class='hl-red'>Segurança (2,69) é o indicador com maior espaço para ganho</b>: nele se concentra a percepção negativa mais aguda.",
+    c1_headline: "Três indicadores estruturais da experiência física: <b class='hl-green'>Sinalização 3,51</b> atravessa o limiar positivo (54,8% avalia como boa); <b class='hl-amber'>Pavimento 3,21</b> em patamar intermediário; <b class='hl-red'>Segurança 2,69</b> concentra a percepção negativa mais aguda — maior espaço para ganho.",
+    c1_diretriz: "O painel se organiza em torno de duas frentes complementares. <b class='hl-green'>Pavimento é a alavanca comum</b> — fator dominante de satisfação e NPS, e também a prioridade espontânea de 58% dos usuários: melhorá-lo move os dois indicadores ao mesmo tempo. <b class='hl-red'>Segurança é o eixo de maior espaço para ganho</b> — aprofundado no slide seguinte. A leitura estratégica é direta: <b class='hl-ink'>pavimento é a frente de avanço; segurança é a frente de correção</b>. Sinalização, já em território positivo, funciona como apoio narrativo enquanto as entregas físicas avançam.",
 
-    c2_leitura: "Segurança ao trafegar foi a <b class='hl-red'>avaliação mais baixa do estudo: média 2,69</b>. <b class='hl-red'>43,4% deram notas 1 ou 2</b> — a crítica mais expressiva de qualquer dimensão. Positivas (4 e 5) somam 21,8%. As vozes abertas dão sentido: <b class='hl-ink'>acidentes, pare-e-siga extensos, ausência de acostamento em trechos duplicados e volume intenso de caminhões</b>.",
+    c2_headline: "Segurança ao trafegar: <b class='hl-red'>média 2,69/5 — avaliação mais baixa do estudo</b>. <b class='hl-red'>43,4% deram notas 1 ou 2</b>, a crítica mais expressiva de qualquer dimensão. Vozes abertas citam <b class='hl-ink'>acidentes, pare-e-siga extensos, ausência de acostamento e volume intenso de caminhões</b>.",
     c2_diretriz: "Eixo com <b class='hl-green'>potencial de resposta rápida em percepção</b>, mesmo enquanto intervenções estruturais maiores amadurecem. <b class='hl-ink'>Sinalização complementar, iluminação em pontos críticos e reforço de acostamento temporário em zonas de obra</b> formam um pacote de ciclo curto capaz de mover o indicador já na próxima onda. Reforçar a <b class='hl-green'>visibilidade de guincho e ambulância</b> também contribui — garantia concreta ao usuário de que há resposta estruturada diante de qualquer ocorrência.",
 
-    c3_leitura: "<b class='hl-red'>Pavimento concentra 58,2%</b> da prioridade espontânea — liderança expressiva, mais de três vezes a segunda opção (segurança, 16,6%). Trechos em obra e pare-e-siga aparecem em 12,2%. A <b class='hl-ink'>convergência com os modelos estatísticos</b> à frente dá força ao diagnóstico: <b class='hl-red'>pavimento é o gargalo único de maior peso</b>.",
-    c3_diretriz: "Base objetiva para <b class='hl-ink'>priorização de investimento</b>. Segurança e obras aparecem em sequência natural — beneficiam-se indiretamente do avanço na pista principal, já que desconforto com pare-e-siga e percepção de risco estão ligados a trechos ainda em intervenção. <b class='hl-lime'>A comunicação precisa acompanhar</b>: conforme a entrega física avança, o usuário deve reconhecer o progresso concreto e associá-lo explicitamente à concessionária.",
+    c3_headline: "Quando perguntados <i>&quot;o que precisa melhorar primeiro?&quot;</i>, <b class='hl-red'>58,2% respondem pavimento</b> — mais de 3 vezes a segunda opção (segurança, 16,6%) e 5 vezes a terceira (trechos em obra e pare-e-siga, 12,2%). A <b class='hl-ink'>convergência com os modelos estatísticos</b> dá força ao diagnóstico: pavimento é o gargalo único de maior peso.",
+    c3_diretriz: "Base objetiva para <b class='hl-ink'>priorização de investimento</b>. Segurança e obras aparecem em sequência natural — beneficiam-se indiretamente do avanço na pista, já que pare-e-siga e percepção de risco estão ligados a trechos ainda em intervenção. <b class='hl-lime'>A comunicação precisa acompanhar</b>: conforme a entrega avança, o usuário deve reconhecer o progresso concreto e associá-lo explicitamente à concessionária.",
 
-    d1_leitura: "Entre os usuários que passaram por obras, <b class='hl-red'>apenas 20,7% atribuem a execução à Nova Rota do Oeste</b>. <b class='hl-amber'>39,8% acreditam que é o Governo do Estado</b> e <b class='hl-amber'>27,2% não sabem informar</b>. DNIT e ANTT somam 12,4%. <b class='hl-ink'>Quem executa as intervenções não é reconhecido por fazê-lo</b> — oportunidade clara de associação de marca.",
-    d1_diretriz: "Possivelmente o <b class='hl-green'>achado com maior potencial de retorno de comunicação</b> da pesquisa. Investimento físico gera valor de marca apenas quando reconhecido como tal. <b class='hl-ink'>Sinalização nos canteiros — placas, tapumes, faixas — associando cada intervenção à Nova Rota</b> converte investimento em percepção. O mesmo vale para comunicação digital e em rádio: vincular explicitamente quilômetros entregues à concessionária amplia o impacto reputacional das entregas físicas.",
+    d1_headline: "<b>96,6% passaram por obras</b> na rodovia recentemente, mas <b class='hl-red'>apenas 20,7% atribuem a execução à Nova Rota do Oeste</b>. A maioria acredita ser responsabilidade do <b class='hl-amber'>Governo do Estado (39,8%)</b> ou <b class='hl-amber'>não sabe informar (27,2%)</b>. <b class='hl-ink'>Quem executa as intervenções não é reconhecido por fazê-lo</b>.",
+    d1_diretriz: "Possivelmente o <b class='hl-green'>achado com maior potencial de retorno de comunicação</b> da pesquisa — investimento físico gera valor de marca apenas quando reconhecido como tal. <b class='hl-ink'>Sinalização nos canteiros (placas, tapumes, faixas)</b> associando cada intervenção à Nova Rota converte investimento em percepção. Vincular explicitamente quilômetros entregues à concessionária em comunicação digital e rádio amplia o impacto reputacional das entregas.",
 
-    d2_diretriz: "O usuário <b class='hl-green'>entende o que está acontecendo</b>, mas <b class='hl-red'>sente o custo operacional</b>. <b class='hl-green'>Clareza (4,25 · 82% positivas)</b> é o melhor indicador do estudo — a comunicação do porquê das obras funciona. Em contrapartida, <b class='hl-red'>Impacto no tempo (2,63 · 51% insatisfação)</b> é o pior. Ritmo e Segurança nas obras ficam no meio. Frente estratégica: <b class='hl-ink'>preservar a compreensão atual enquanto se reduz o custo percebido</b> — menos tempo em pare-e-siga, melhor condução do fluxo, previsibilidade na entrega.",
+    d2_headline: "O usuário <b class='hl-green'>entende o que está acontecendo</b>, mas <b class='hl-red'>sente o custo operacional</b>. <b class='hl-green'>Clareza (4,25 · 82% positivas)</b> é o melhor indicador do estudo; <b class='hl-red'>Impacto no tempo (2,63 · 51% insatisfação)</b> é o pior. Ritmo (3,32) e Segurança nas obras (3,15) ficam no meio.",
+    d2_diretriz: "Frente estratégica: <b class='hl-ink'>preservar a compreensão atual enquanto se reduz o custo percebido</b>. A comunicação sobre o porquê das obras está funcionando (82% entendem) — <b class='hl-green'>manter esse ativo</b>. O desafio operacional é alinhar o ritmo de execução com a expectativa do usuário: <b class='hl-red'>menos tempo em pare-e-siga, melhor condução do fluxo e previsibilidade na entrega</b> são as três alavancas que reduzem o atrito sem comprometer o entendimento já conquistado.",
 
-    d3_leitura: "Usuários de <b class='hl-red'>menor frequência (mensais)</b> expressam avaliações mais duras. <b class='hl-red'>Impacto no tempo cai a 2,37</b> nesse grupo; Segurança nas obras também piora (2,98). Diários e semanais têm avaliações mais estáveis. <b class='hl-green'>Clareza se mantém elevada em todas as faixas (4,04–4,32)</b>: a comunicação sobre o motivo das obras alcança bem todos os perfis.",
+    d3_headline: "Usuários de <b class='hl-red'>menor frequência (mensais)</b> expressam avaliações mais duras — <b class='hl-red'>Impacto no tempo cai a 2,37</b> e Segurança nas obras vai a 2,98. Diários e semanais têm avaliações mais estáveis. <b class='hl-green'>Clareza se mantém elevada em todas as faixas (4,04–4,32)</b>: a comunicação do motivo das obras alcança todos os perfis.",
     d3_diretriz: "Quem convive diariamente com as obras <b class='hl-ink'>desenvolveu adaptação</b> — conhece horários, trechos críticos, ajusta expectativa. Quem passa esporadicamente encontra a rodovia sempre sob intervenção, sem familiaridade que amortece o impacto. Duas frentes: para alta frequência, <b class='hl-green'>informação em tempo real nos canais em rota</b> reduz atrito; para esporádicos — boa parte vinda de outros estados — <b class='hl-green'>comunicação proativa antes da viagem</b> prepara expectativa.",
 
-    e1_leitura: "<b>28,6% já utilizaram algum serviço</b> da concessionária (110 entrevistados). Entre esses, <b class='hl-green'>guincho/apoio mecânico domina (85,5%)</b>, seguido de ambulância (18,2%) e base SAU (8,2%). Informações de tráfego teve só 2 usos. O perfil é coerente com a amostra: <b class='hl-ink'>caminhoneiros em longas distâncias com risco elevado de pane mecânica</b>.",
+    e1_headline: "<b>28,6% já utilizaram algum serviço</b> da concessionária (110 entrevistados). Entre esses, <b class='hl-green'>guincho/apoio mecânico domina (85,5%)</b>, seguido de ambulância (18,2%) e SAU (8,2%). Perfil coerente com caminhoneiros em longas distâncias.",
     e1_diretriz: "O <b class='hl-green'>guincho é a principal interface</b> entre a Nova Rota e o usuário de campo. Quem precisou entrou em contato direto com a operação — e, como mostra o próximo slide, <b class='hl-green'>com experiência bastante positiva</b>. Ampliar alcance via painéis, rádio e WhatsApp transforma um serviço pontual em <b class='hl-ink'>sinalização constante de presença</b>.",
 
     e2_leitura: "Serviços operacionais recebem as <b class='hl-green'>avaliações mais altas do estudo</b>. <b class='hl-green'>Ambulância: 4,80/5 com 95% positivas — o melhor resultado da pesquisa</b>. Guincho: 4,27/5 com 83% (n=94, maior base). Base SAU: 3,67/5 com 67% (n=9). Informações de tráfego teve apenas 2 avaliações — base pequena demais para conclusão.",
-    e2_diretriz: "Os serviços de campo são o <b class='hl-green'>principal ativo de diferenciação positiva</b> da Nova Rota. Enquanto a infraestrutura avança no ritmo das obras, é o <b class='hl-green'>atendimento humano</b> — guincho, ambulância, SAU — que carrega a experiência mais positiva com a concessionária. Ampliar por duas vias: <b class='hl-ink'>tornar o serviço mais conhecido</b> entre quem ainda não precisou, e <b class='hl-ink'>usá-lo como referência narrativa</b> institucional. Na conversão de neutros em promotores, é o argumento concreto mais forte disponível hoje.",
+    e2_headline: "Serviços de campo recebem as <b class='hl-green'>avaliações mais altas do estudo</b>. <b class='hl-green'>Ambulância/socorro médico: 4,80/5 · 95% positivas — o melhor resultado da pesquisa</b>. Guincho: 4,27/5 · 83% (n=94, maior base). SAU: 3,67/5 · 67% (n=9). Informações de tráfego com base muito pequena (n=2).",
+    e2_diretriz: "O atendimento humano é o <b class='hl-green'>principal ativo de diferenciação positiva</b> da Nova Rota — enquanto a infraestrutura avança no ritmo das obras, é ele que carrega a experiência mais positiva com a concessionária. Ampliar por duas vias: <b class='hl-ink'>tornar os serviços mais conhecidos</b> entre quem ainda não precisou (visibilidade) e <b class='hl-ink'>usá-los como referência narrativa</b> institucional. Na conversão de neutros em promotores, é o argumento concreto mais forte disponível hoje.",
 
-    f1_leitura: "<b class='hl-red'>42,3% não conhecem nenhum canal</b> de contato da concessionária. Entre os que conhecem, <b>0800/Ouvidoria lidera (36,6%)</b>, seguido de painéis eletrônicos (29,4%). Site e redes sociais somam &lt; 15% juntos — coerente com o perfil: <b class='hl-ink'>profissional em movimento contínuo, com acesso limitado à internet</b>. A penetração institucional ainda é baixa para o volume da BR-163.",
+    f1_headline: "<b class='hl-red'>42,3% não conhecem nenhum canal</b> de contato da Nova Rota — maior categoria isolada. Entre os que conhecem, <b>0800/Ouvidoria lidera (36,6%)</b>, seguido de painéis eletrônicos (29,4%). Site e redes sociais somam &lt; 15% juntos, coerente com o perfil: <b class='hl-ink'>profissional em movimento contínuo, com acesso limitado à internet</b>.",
     f1_diretriz: "Espaço amplo para ampliar presença institucional. Prioridade: <b class='hl-ink'>fortalecer 0800 e painéis antes de investir em canais novos</b>. Baixa visibilidade não é falha de conteúdo — o usuário simplesmente não encontra a Nova Rota nos canais que usa. Cada painel adicional, cada menção em rádio regional amplia progressivamente o alcance. <b class='hl-lime'>Construir conhecimento de canal é pré-requisito</b> para usar a comunicação como ferramenta de gestão de percepção.",
 
-    f2_leitura: "Entre os <b>19,5% que entraram em contato</b> (n=75), a experiência é positiva: <b class='hl-green'>CSAT 4,11/5 (75% positivas)</b> e <b class='hl-green'>CES 4,23/5 (84% positivas)</b> — melhor resultado do conjunto. A <b>Confiança nas informações</b>, avaliada por toda a base, tem média <b class='hl-green'>3,90/5 (71% positivas)</b> — patamar razoável para uma marca com penetração institucional em consolidação.",
-    f2_diretriz: "<b class='hl-green'>O atendimento funciona bem para quem chega até ele</b>. O desafio não é melhorar a qualidade do contato — é <b class='hl-amber'>ampliar o grupo que sabe que pode contar com a concessionária</b>. Priorizar <b class='hl-ink'>awareness</b>: tornar o 0800 e os canais mais visíveis, via menção sistemática em painéis e comunicação dirigida ao motorista profissional. A confiança de 3,90 é margem de crescimento, reforçável pela <b class='hl-ink'>associação explícita entre comunicação e entregas concretas</b>.",
+    f2_headline: "Apenas <b class='hl-amber'>19,5% entraram em contato</b> com a Nova Rota (n=75). Entre eles, a experiência é positiva: <b class='hl-green'>CSAT 4,11/5 (75% positivas)</b> e <b class='hl-green'>CES 4,23/5 (84% positivas)</b>. A <b>Confiança nas informações</b>, avaliada por toda a base, tem <b class='hl-green'>média 3,90/5 (71% positivas)</b> — <b class='hl-green'>patamar sólido</b> para marca ainda em consolidação institucional. <i style='font-weight:400;color:var(--muted)'>CSAT e CES medidos no grupo que contatou · Confiança, em toda a base (n=385)</i>.",
+    f2_diretriz: "<b class='hl-green'>O atendimento funciona bem para quem chega até ele</b>. O desafio não é melhorar a qualidade do contato — é <b class='hl-amber'>ampliar o grupo que sabe que pode contar com a concessionária</b>. Priorizar <b class='hl-ink'>visibilidade dos canais</b>: tornar o 0800 e os meios disponíveis mais conhecidos, via menção sistemática em painéis e comunicação dirigida ao motorista profissional. A <b class='hl-green'>confiança sólida de 3,90 é um ativo a preservar</b> e amplificar pela <b class='hl-ink'>associação explícita entre comunicação e entregas concretas</b>.",
 
-    f3_leitura: "<b class='hl-green'>Painéis eletrônicos em rota: 49,6% da preferência</b> — quase metade da base. WhatsApp em segundo (15,6%), seguido de rádio (6,5%) e aplicativo (5,7%). Site e redes sociais têm preferência marginal; 17,1% sem preferência. Reforça o comportamento do usuário profissional: <b class='hl-ink'>quer informação no momento e no lugar em que está trafegando</b> — não antes, não depois.",
+    f3_headline: "<b class='hl-green'>Painéis eletrônicos em rota: 49,6% da preferência</b> — quase metade da base. WhatsApp em segundo (15,6%), seguido de rádio (6,5%) e aplicativo (5,7%). Site e redes sociais têm preferência marginal; 17,1% sem preferência. Reforça o comportamento do usuário profissional: <b class='hl-ink'>quer informação no momento e no lugar em que está trafegando</b> — não antes, não depois.",
     f3_diretriz: "<b class='hl-green'>Painéis = ponto de entrega mais eficiente</b>: em escala e em momento de consumo. A ascensão do <b class='hl-ink'>WhatsApp como segundo canal</b> aponta oportunidade complementar — canais leves que o motorista consulta quando para. Recomendação: <b class='hl-ink'>investir em densidade de painéis em rota (mais pontos, conteúdo dinâmico)</b> e avaliar <b class='hl-ink'>canal WhatsApp oficial</b> para alertas de tráfego. Site e redes sociais continuam, mas como reforço — não primeira linha.",
 
-    g0_leitura: "O tempo de uso estrutura as respostas de forma sistemática. O <b class='hl-red'>NPS cai de +13,3 (&lt;1 ano) para −39,2 (5+ anos)</b>. No sentido inverso, a <b class='hl-green'>confiança nas informações sobe com o tempo de uso (3,58 → 3,87 → 3,91)</b>. A <b class='hl-green'>percepção de melhoria em 2 anos</b> — só perguntada a quem tem 2+ anos de rodovia — chega a 88,9% e 85,7% nas duas faixas. Quanto mais o usuário conhece a BR-163, mais confia no processo, mais reconhece o arco de melhoria — e mais severamente avalia o estado atual.",
+    g0_headline: "O tempo de uso estrutura as respostas de forma sistemática. O <b class='hl-red'>NPS cai de +13,3 (&lt;1 ano) para −39,2 (5+ anos)</b>. No sentido inverso, a <b class='hl-green'>confiança nas informações sobe com o tempo de uso (3,58 → 3,87 → 3,91)</b>. A <b class='hl-green'>percepção de melhoria em 2 anos</b> — só perguntada a quem tem 2+ anos de rodovia — chega a 88,9% e 85,7% nas duas faixas. Quanto mais o usuário conhece a BR-163, mais confia no processo, mais reconhece o arco de melhoria — e mais severamente avalia o estado atual.",
     g0_diretriz: "O usuário de longa data <b class='hl-ink'>não é simplesmente mais insatisfeito: é mais exigente e mais informado</b>. Carrega memória histórica, sabe onde as falhas se repetem, cobra o que ainda falta — e, simultaneamente, confia mais e enxerga a trajetória com mais nitidez. <b class='hl-green'>É a audiência certa para comunicação de progresso com dado concreto</b>: quilômetros entregues, obras finalizadas, intervenções em curso. <b class='hl-amber'>A leitura do NPS ganha nuance: notas duras expressam exigência acumulada, não rejeição</b> — e devem responder com clareza aos avanços das próximas ondas.",
+
+    h1_headline: "<b class='hl-ink'>Três frentes críticas e dois ativos consolidados</b> marcam o ponto-zero da Onda 1. <b class='hl-red'>Segurança geral, atribuição das obras e canais de comunicação</b> exigem ação prioritária; <b class='hl-green'>serviços operacionais (ambulância 4,80 · guincho 4,27) e a trajetória de melhoria percebida (86,2%)</b> já se firmam como diferenciais da concessionária.",
 
     h1_crit1: "<b class='hl-red'>Segurança geral com média 2,69/5 e B2B de 43,4%</b> — pior indicador do estudo e segundo driver mais forte do NPS (β=+0,20). Elevar a percepção de segurança move diretamente a disposição de recomendar.",
     h1_crit2: "<b class='hl-red'>Apenas 20,7% atribuem as obras à Nova Rota do Oeste</b>. 39,8% acreditam ser o Governo do Estado e 27,2% não sabem informar. Investimento físico sem reconhecimento gera valor de marca limitado — <b class='hl-ink'>associação explícita em canteiros e comunicação é ganho imediato</b>.",
@@ -6027,12 +6008,13 @@ const D = {
     h1_pos2: "<b class='hl-green'>86,2% percebem melhora nos últimos 2 anos</b>. A regressão confirma o papel do ritmo das obras — <b class='hl-green'>2º driver de satisfação (β=+0,19)</b> e 3º do NPS (β=+0,16). Comunicar progresso concreto converte essa percepção em avaliação mensurável.",
     h1_enquadramento: "A análise multivariada separou drivers reais de correlatos. <b class='hl-green'>Pavimento domina ambos os modelos</b>. Satisfação: também Ritmo, Confiança, Segurança e Clareza. NPS: também Segurança, Ritmo, Sinalização e Confiança. <b class='hl-ink'>Agendas convergentes</b> — entregar pavimento e acelerar obras move os dois indicadores simultaneamente. As próximas ondas medirão a reação do usuário à entrega.",
 
-    i1_leitura: "O modelo identificou <b class='hl-ink'>cinco fatores com efeito independente e significativo</b> sobre a satisfação geral. <b class='hl-green'>Pavimento é o driver dominante (β=+0,40)</b>, com efeito mais de duas vezes maior que o segundo. Seguem <b class='hl-green'>Ritmo das obras (β=+0,19)</b>, <b>Confiança nas informações (β=+0,16)</b>, <b>Segurança geral (β=+0,12)</b> e <b>Clareza sobre as obras (β=+0,08)</b>. Os demais itens correlacionam com satisfação, mas têm efeito absorvido pelos drivers acima.",
+    i1_headline: "O modelo identificou <b class='hl-ink'>cinco fatores com efeito independente e significativo</b> sobre a satisfação geral. <b class='hl-green'>Pavimento é o driver dominante (β=+0,40)</b>, com efeito mais de duas vezes maior que o segundo. Seguem <b class='hl-green'>Ritmo das obras (β=+0,19)</b>, <b>Confiança nas informações (β=+0,16)</b>, <b>Segurança geral (β=+0,12)</b> e <b>Clareza sobre as obras (β=+0,08)</b>. Os demais itens correlacionam com satisfação, mas têm efeito absorvido pelos drivers acima.",
     i1_diretriz: "Para mover satisfação: <b class='hl-green'>prioridade absoluta é pavimento</b>, reforçado pelo ritmo de entrega das obras. Comunicação e transparência (confiança, clareza) aparecem como drivers secundários — úteis para sustentar a narrativa enquanto a entrega física acontece. <b>O modelo explica 54% da variação</b> na satisfação — base sólida para priorizar investimento.",
 
     i2_achado: "<b class='hl-green'>Pavimento é o driver dominante tanto da satisfação quanto do NPS</b> — mas o NPS tem um perfil bem mais distribuído: cinco fatores com peso relevante, enquanto na satisfação o pavimento concentra o efeito principal.",
-    i2_leitura: "<b class='hl-ink'>O NPS tem um perfil de drivers mais distribuído</b> que a satisfação. Cinco fatores significativos: <b class='hl-green'>Pavimento (β=+0,25)</b> no topo, seguido de <b class='hl-green'>Segurança geral (β=+0,20)</b>, <b>Ritmo das obras (β=+0,16)</b>, <b>Sinalização (β=+0,16)</b> e <b>Confiança (β=+0,14)</b>. Nenhum driver com efeito negativo significativo — Impacto no tempo teve coeficiente −0,06 mas não atingiu significância estatística nesta onda.",
+    i2_headline: "<b class='hl-ink'>O NPS tem um perfil de drivers mais distribuído</b> que a satisfação. Cinco fatores significativos: <b class='hl-green'>Pavimento (β=+0,25)</b> no topo, seguido de <b class='hl-green'>Segurança geral (β=+0,20)</b>, <b>Ritmo das obras (β=+0,16)</b>, <b>Sinalização (β=+0,16)</b> e <b>Confiança (β=+0,14)</b>. Nenhum driver com efeito negativo significativo — Impacto no tempo teve coeficiente −0,06 mas não atingiu significância estatística nesta onda.",
     i2_diretriz: "<b class='hl-green'>Pavimento é a alavanca comum</b>: top driver em ambos os modelos. Para o NPS, <b class='hl-ink'>segurança geral e ritmo das obras somam peso relevante adicional</b>; sinalização e confiança aparecem com peso comparável. <b class='hl-lime'>Boa notícia: todas as agendas se reforçam</b> — entregar pavimento move satisfação e NPS; acelerar obras também; reforçar sinalização e comunicação são ganhos independentes sobre o NPS.",
+    h2_headline: "A Onda 1 é a <b class='hl-ink'>linha de base</b> da série. A <b class='hl-green'>Onda 2 (prevista para jul/2026)</b> permitirá a primeira comparação nos indicadores críticos; a <b class='hl-green'>Onda 3 (prevista para nov/2026)</b> fecha o ciclo e habilita o <b class='hl-ink'>dashboard longitudinal</b> — conversão do diagnóstico pontual em leitura de trajetória para tomada de decisão contínua.",
     h2_foco: ["NPS","Segurança geral","Ritmo das obras","Atribuição de responsabilidade","Confiança nas informações"],
   }
 };
@@ -6099,6 +6081,44 @@ function barras(id, items, opts={}) {
   }).join('');
 }
 
+// Gráfico de pizza (SVG) com legenda lateral.
+// opts: colors (array), size (diâmetro em px).
+function pizza(id, items, opts={}) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const COLORS = opts.colors || ['var(--lime)', 'var(--lime2)', 'var(--muted)'];
+  const total  = items.reduce((s, it) => s + it.pct, 0) || 1;
+  const size   = opts.size || 220;
+  const r      = size / 2 - 4;
+  const cx = size / 2, cy = size / 2;
+  let a0 = -Math.PI / 2;
+  const paths = items.map((it, i) => {
+    const frac = it.pct / total;
+    if (frac <= 0) return '';
+    const a1 = a0 + frac * 2 * Math.PI;
+    const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
+    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    const large = frac > 0.5 ? 1 : 0;
+    const d = frac >= 0.999
+      ? `M ${cx-r} ${cy} A ${r} ${r} 0 1 1 ${cx+r} ${cy} A ${r} ${r} 0 1 1 ${cx-r} ${cy}`
+      : `M ${cx} ${cy} L ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)} Z`;
+    a0 = a1;
+    return `<path d="${d}" fill="${COLORS[i % COLORS.length]}" stroke="#fff" stroke-width="1.5"/>`;
+  }).join('');
+  el.innerHTML = `
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center">
+      <svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="flex-shrink:0;max-width:100%">${paths}</svg>
+      <div style="flex:1;min-width:140px;display:flex;flex-direction:column;gap:8px">
+        ${items.map((it, i) => `
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="width:12px;height:12px;background:${COLORS[i % COLORS.length]};border-radius:2px;flex-shrink:0"></span>
+            <span style="flex:1;color:var(--ink);font-weight:600">${it.label}</span>
+            <span style="font-weight:800;color:${COLORS[i % COLORS.length]};font-size:14px">${f.pct(it.pct)}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
 // Barras verticais (colunas). Escala pela maior categoria.
 // opts: cor, height (px do bloco inteiro), labelSize, valSize, gap, maxColW.
 function barrasV(id, items, opts={}) {
@@ -6138,7 +6158,7 @@ function escalaDist(id, dist) {
     ${dist.map(d=>{
       const bh = Math.max(6, Math.round((d.pct/max)*(CH-28)));
       return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
-        <span style="font-size:10px;font-weight:700;color:${cors[d.nota]}">${f.pct(d.pct)}</span>
+        <span style="font-size:12px;font-weight:700;color:${cors[d.nota]}">${f.pct(d.pct)}</span>
         <div style="width:100%;height:${bh}px;background:${cors[d.nota]};border-radius:4px 4px 0 0"></div>
         <span style="font-size:9.5px;color:var(--muted);font-weight:800">${d.nota}</span>
       </div>`;
@@ -6202,7 +6222,7 @@ function distribCard(id, titulo, dado, opts={}) {
   const distColor = n => n<=2 ? (n===1?'#b91c1c':'#ef4444') : n===3 ? '#9ca3af' : (n===4?'#16a34a':'#15803d');
   const anchorLow  = opts.anchorLow  || 'Muito insatisf.';
   const anchorHigh = opts.anchorHigh || 'Muito satisf.';
-  const CH = 140;              // altura fixa do canvas (px)
+  const CH = 110;              // altura fixa do canvas (px)
   const BH = CH - 26;          // altura útil p/ barras (desconta val+nota+gaps)
 
   el.innerHTML = `
@@ -6218,7 +6238,7 @@ function distribCard(id, titulo, dado, opts={}) {
         </div>`;
       }).join('')}
     </div>
-    <div style="display:flex;justify-content:space-between;margin-top:10px;padding:0 2px;font-size:9px;font-weight:700">
+    <div style="display:flex;justify-content:space-between;margin-top:10px;padding:0 2px;font-size:11px;font-weight:700">
       <span style="color:var(--red)">1 · ${anchorLow.toLowerCase()}</span>
       <span style="color:var(--muted)">3 · neutro</span>
       <span style="color:var(--emerald)">5 · ${anchorHigh.toLowerCase()}</span>
@@ -6227,7 +6247,7 @@ function distribCard(id, titulo, dado, opts={}) {
 }
 
 function escalaDist_inline(dist) {
-  const CH = 110;
+  const CH = 90;
   const max = Math.max(...dist.map(d=>d.pct));
   // Paleta canônica: 3 = cinza (neutro), gradiente vermelho→verde nas pontas
   const cors = {1:'#b91c1c',2:'#ef4444',3:'#9ca3af',4:'#16a34a',5:'#15803d'};
@@ -6235,7 +6255,7 @@ function escalaDist_inline(dist) {
     ${dist.map(d=>{
       const bh = Math.max(4, Math.round((d.pct/max)*(CH-26)));
       return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
-        <span style="font-size:9px;font-weight:700;color:${cors[d.nota]}">${f.pct(d.pct)}</span>
+        <span style="font-size:11px;font-weight:700;color:${cors[d.nota]}">${f.pct(d.pct)}</span>
         <div style="width:100%;height:${bh}px;background:${cors[d.nota]};border-radius:4px 4px 0 0"></div>
         <span style="font-size:8.5px;color:var(--muted);font-weight:700">${d.nota}</span>
       </div>`;
@@ -6261,7 +6281,7 @@ function obraCard(id, titulo, dado, opts={}) {
       </span>
     </div>
     ${escalaDist_inline(dado.dist)}
-    <div style="display:flex;justify-content:space-between;margin-top:6px;padding:0 2px;font-size:9px;font-weight:700">
+    <div style="display:flex;justify-content:space-between;margin-top:6px;padding:0 2px;font-size:11px;font-weight:700">
       <span style="color:var(--red)">1 · ${anchorLow}</span>
       <span style="color:var(--muted)">3 · neutro</span>
       <span style="color:var(--emerald)">5 · ${anchorHigh}</span>
@@ -6510,29 +6530,33 @@ function renderNPS() {
   // distribuição 0-10 — pixel heights + cores por grupo
   const dist = document.getElementById('b1-dist');
   if (dist) {
-    const CH = 100;
-    const max = Math.max(...D.nps_dist.map(d=>d.pct));
+    // REGRA CANÔNICA: barras em px calculadas via JS sobre um CH fixo.
+    // Não usar height:% nem flex-grow — frágil em nested flex.
     const npsCor = n => {
       const reds=['#7f1d1d','#991b1b','#b91c1c','#dc2626','#ef4444','#f87171','#fca5a5'];
       if(n<=6) return reds[n];
       if(n<=8) return n===7?'#6b7280':'#9ca3af';
       return n===9?'#16a34a':'#15803d';
     };
-    dist.style.height = CH+'px';
+    const CH  = 240;               // altura fixa do canvas (px)
+    const BH  = CH - 30;           // área útil: desconta val(~12) + nota(~12) + gaps(~6)
+    const max = Math.max(...D.nps_dist.map(d=>d.pct));
+    dist.style.height = CH + 'px';
+    dist.style.display = 'flex';
     dist.style.alignItems = 'flex-end';
     dist.style.gap = '4px';
     dist.innerHTML = D.nps_dist.map(d => {
-      const bh = Math.max(4, Math.round((d.pct/max)*(CH-26)));
-      const c = npsCor(d.nota);
-      return `<div class="nps-dist-col">
-        <span style="font-size:9px;font-weight:700;color:${c};margin-bottom:2px">${f.pct(d.pct)}</span>
+      const c  = npsCor(d.nota);
+      const bh = Math.max(3, Math.round((d.pct / max) * BH));
+      return `<div class="nps-dist-col" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0">
+        <span style="font-size:12px;font-weight:700;color:${c};line-height:1">${f.pct(d.pct)}</span>
         <div style="width:100%;height:${bh}px;background:${c};border-radius:4px 4px 0 0"></div>
         <div class="nps-dist-lbl">${d.nota}</div>
       </div>`;
     }).join('');
   }
 
-  setHtml('b1-leitura', D.txt.b1_leitura);
+  setHtml('b1-headline', D.txt.b1_headline);
   setHtml('b1-diretriz', D.txt.b1_diretriz);
 }
 
@@ -6581,24 +6605,25 @@ function renderSatGeral() {
   // Distribuição 1-5 — mesmo estilo visual da distribuição NPS (nps-dist)
   const dist = document.getElementById('b2-dist');
   if(dist){
-    const CH = 100;
+    const CH = 200;
     const max = Math.max(...D.sat_dist.map(d => d.pct));
     const satCor = n => n<=2 ? (n===1?'#b91c1c':'#ef4444') : n===3 ? '#9ca3af' : (n===4?'#16a34a':'#15803d');
     dist.style.height = CH + 'px';
+    dist.style.display = 'flex';
     dist.style.alignItems = 'flex-end';
     dist.style.gap = '6px';
     dist.innerHTML = D.sat_dist.map(d => {
       const bh = Math.max(4, Math.round((d.pct/max)*(CH-26)));
       const c  = satCor(d.nota);
       return `<div class="nps-dist-col">
-        <span style="font-size:9px;font-weight:700;color:${c};margin-bottom:2px">${f.pct(d.pct)}</span>
+        <span style="font-size:12px;font-weight:700;color:${c};margin-bottom:2px">${f.pct(d.pct)}</span>
         <div style="width:100%;height:${bh}px;background:${c};border-radius:4px 4px 0 0"></div>
         <div class="nps-dist-lbl">${d.nota}</div>
       </div>`;
     }).join('');
   }
 
-  setHtml('b2-leitura',  D.txt.b2_leitura);
+  setHtml('b2-headline', D.txt.b2_headline);
   setHtml('b2-diretriz', D.txt.b2_diretriz);
 }
 
@@ -6643,22 +6668,23 @@ function renderEvolucao() {
   if (dist) {
     const order = ["Muito pior", "Um pouco pior", "Igual", "Um pouco melhor", "Muito melhor"];
     const data  = order.map(lbl => D.evol.find(e => e.label === lbl) || {label:lbl, pct:0, cor:'#9ca3af'});
-    const CH  = 100;
+    const CH  = 200;
     const max = Math.max(...data.map(d => d.pct)) || 1;
     dist.style.height = CH + 'px';
+    dist.style.display = 'flex';
     dist.style.alignItems = 'flex-end';
     dist.style.gap = '6px';
     dist.innerHTML = data.map((d, i) => {
       const bh = Math.max(4, Math.round((d.pct/max)*(CH-26)));
       return `<div class="nps-dist-col">
-        <span style="font-size:9px;font-weight:700;color:${d.cor};margin-bottom:2px">${f.pct(d.pct)}</span>
+        <span style="font-size:12px;font-weight:700;color:${d.cor};margin-bottom:2px">${f.pct(d.pct)}</span>
         <div style="width:100%;height:${bh}px;background:${d.cor};border-radius:4px 4px 0 0"></div>
         <div class="nps-dist-lbl">${i+1}</div>
       </div>`;
     }).join('');
   }
 
-  setHtml('b3-leitura',  D.txt.b3_leitura);
+  setHtml('b3-headline', D.txt.b3_headline);
   setHtml('b3-diretriz', D.txt.b3_diretriz);
 }
 
@@ -6676,6 +6702,7 @@ function renderInfra() {
               {anchorLow:'Muito ruim',     anchorHigh:'Muito boa'});
   distribCard('c1-dist-seg', 'Segurança Geral', D.seg,
               {anchorLow:'Muito inseguro', anchorHigh:'Muito seguro'});
+  setHtml('c1-headline', D.txt.c1_headline);
   setHtml('c1-diretriz', D.txt.c1_diretriz);
 
   // C2 — indicador único (padrão score+bar+groups+dist, igual a B2/B3)
@@ -6714,39 +6741,53 @@ function renderInfra() {
 
   const distC2 = document.getElementById('c2-dist');
   if(distC2){
-    const CH = 100;
+    const CH = 200;
     const max = Math.max(...seg.dist.map(d => d.pct));
     const satCor = n => n<=2 ? (n===1?'#b91c1c':'#ef4444') : n===3 ? '#9ca3af' : (n===4?'#16a34a':'#15803d');
     distC2.style.height = CH + 'px';
+    distC2.style.display = 'flex';
     distC2.style.alignItems = 'flex-end';
     distC2.style.gap = '6px';
     distC2.innerHTML = seg.dist.map(d => {
       const bh = Math.max(4, Math.round((d.pct/max)*(CH-26)));
       const c  = satCor(d.nota);
       return `<div class="nps-dist-col">
-        <span style="font-size:9px;font-weight:700;color:${c};margin-bottom:2px">${f.pct(d.pct)}</span>
+        <span style="font-size:12px;font-weight:700;color:${c};margin-bottom:2px">${f.pct(d.pct)}</span>
         <div style="width:100%;height:${bh}px;background:${c};border-radius:4px 4px 0 0"></div>
         <div class="nps-dist-lbl">${d.nota}</div>
       </div>`;
     }).join('');
   }
-  setHtml('c2-leitura',  D.txt.c2_leitura);
+  setHtml('c2-headline', D.txt.c2_headline);
   setHtml('c2-diretriz', D.txt.c2_diretriz);
 
-  // C3
-  barras('c3-ranking', D.prioridade, {cor:'var(--lime)'});
-  setHtml('c3-leitura',  D.txt.c3_leitura);
+  // C3 — ranking vertical (9 categorias)
+  barrasV('c3-ranking', D.prioridade, {
+    cor:'var(--lime)', height:380, maxColW:120, gap:6,
+    labelSize:11, valSize:13
+  });
+  setHtml('c3-headline', D.txt.c3_headline);
   setHtml('c3-diretriz', D.txt.c3_diretriz);
 }
 
 function renderObras() {
-  // D1
-  barras('d1-exposicao', D.obras_exposicao, {cor:'var(--lime)'});
+  // D1 — pizza (exposição) + barras verticais (atribuição)
+  pizza('d1-exposicao', D.obras_exposicao, {
+    colors:['var(--lime)','var(--muted)','var(--amber)'],
+    size:220
+  });
   setTxt('d1-n', f.n(D.obras_n));
 
-  const atr = D.obras_atrib.map(a => ({...a, cor: a.label==='Nova Rota do Oeste'?'var(--lime2)':'var(--muted)'}));
-  barras('d1-atribuicao', atr, {maxBar:50});
-  setHtml('d1-leitura',  D.txt.d1_leitura);
+  // Destaque Nova Rota em lime; demais em cinza
+  const atr = D.obras_atrib.map(a => ({
+    ...a,
+    cor: a.label === 'Nova Rota do Oeste' ? 'var(--lime2)' : '#9ca3af'
+  }));
+  barrasV('d1-atribuicao', atr, {
+    cor:'#9ca3af', height:360, maxColW:120, gap:6,
+    labelSize:11, valSize:13
+  });
+  setHtml('d1-headline', D.txt.d1_headline);
   setHtml('d1-diretriz', D.txt.d1_diretriz);
 
   // D2
@@ -6758,6 +6799,7 @@ function renderObras() {
            {anchorLow:'discorda totalmente', anchorHigh:'concorda totalmente'});
   obraCard('d2-card-impacto', 'Impacto no tempo de viagem', D.impacto,
            {anchorLow:'nenhum impacto',      anchorHigh:'grande impacto'});
+  setHtml('d2-headline', D.txt.d2_headline);
   setHtml('d2-diretriz', D.txt.d2_diretriz);
 
   // D3 — heatmap de tiles: indicador × frequência, tile colorido com valor grande
@@ -6803,41 +6845,29 @@ function renderObras() {
 
     hm.innerHTML = html;
   }
-  setHtml('d3-leitura',  D.txt.d3_leitura);
+  setHtml('d3-headline', D.txt.d3_headline);
   setHtml('d3-diretriz', D.txt.d3_diretriz);
 }
 
 function renderServicos() {
-  // E1 — score + composição (inspirado no padrão do slide 14)
-  const usou_pct = D.srv_usou_pct;
-  const nao_pct  = Math.round((100 - usou_pct) * 10) / 10;
-
-  const e1pct = document.getElementById('e1-pct-usou');
-  if (e1pct) e1pct.textContent = f.pct(usou_pct);
+  // E1 — pizza (alcance) + barras verticais (quais serviços)
   setTxt('e1-n-total', f.n(D.n_total));
-  setTxt('e1-n-usou',  f.n(D.srv_usou_n));
   setTxt('e1-n-base',  f.n(D.srv_n_base));
 
-  const bar = document.getElementById('e1-bar');
-  if (bar) bar.innerHTML = `
-    <div class="nps-bar-seg" style="flex:${usou_pct};background:#16a34a"></div>
-    <div class="nps-bar-seg" style="flex:${nao_pct};background:#9ca3af"></div>`;
+  const expServ = [
+    {label: 'Usaram algum serviço', pct: D.srv_usou_pct},
+    {label: 'Não usaram',           pct: Math.round((100 - D.srv_usou_pct) * 10) / 10}
+  ];
+  pizza('e1-exposicao', expServ, {
+    colors: ['var(--lime2)', '#9ca3af'],
+    size: 220
+  });
 
-  const grp = document.getElementById('e1-groups');
-  if (grp) grp.innerHTML = `
-    <div class="nps-group" style="background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.15)">
-      <div class="ng-label" style="color:var(--emerald)">Usaram</div>
-      <div class="ng-pct" style="color:var(--emerald)">${f.pct(usou_pct)}</div>
-      <div class="ng-n">n = ${f.n(D.srv_usou_n)}</div>
-    </div>
-    <div class="nps-group" style="background:rgba(156,163,175,.07);border:1px solid rgba(156,163,175,.2)">
-      <div class="ng-label" style="color:var(--muted)">Não usaram</div>
-      <div class="ng-pct" style="color:var(--muted)">${f.pct(nao_pct)}</div>
-      <div class="ng-n">n = ${f.n(D.n_total - D.srv_usou_n)}</div>
-    </div>`;
-
-  barras('e1-quais', D.srv_quais, {cor:'var(--lime)'});
-  setHtml('e1-leitura',  D.txt.e1_leitura);
+  barrasV('e1-quais', D.srv_quais, {
+    cor:'var(--lime)', height:340, maxColW:120, gap:6,
+    labelSize:11, valSize:13
+  });
+  setHtml('e1-headline', D.txt.e1_headline);
   setHtml('e1-diretriz', D.txt.e1_diretriz);
 
   // E2 — 4 obraCards (mesmo padrão do slide 21), ordenados por média
@@ -6849,29 +6879,25 @@ function renderServicos() {
     {id:'e2-card-info',      label:`Informações de tráfego · n=${D.srv_info.n}`,         dado:D.srv_info},
   ];
   srvs.forEach(s => obraCard(s.id, s.label, s.dado, anchors));
+  setHtml('e2-headline', D.txt.e2_headline);
   setHtml('e2-diretriz', D.txt.e2_diretriz);
 }
 
 function renderComunicacao() {
-  // F1 — renderiza barras canônicas; se existir "Não conheço nenhum",
-  // acrescenta como item destacado em vermelho no topo.
-  const canaisSemNenhum = D.canais.filter(c=>c.label!=='Não conheço nenhum');
-  const nenhum = D.canais.find(c=>c.label==='Não conheço nenhum');
-  barras('f1-canais', canaisSemNenhum, {cor:'var(--lime)'});
-  if (nenhum) {
-    const f1 = document.getElementById('f1-canais');
-    const destaque = `<div style="margin-bottom:10px;padding:10px 12px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.15);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:12px;font-weight:700;color:var(--red)">${nenhum.label}</span>
-      <span style="font-size:18px;font-weight:800;color:var(--red)">${f.pct(nenhum.pct)}</span>
-    </div>`;
-    if (f1) f1.insertAdjacentHTML('afterbegin', destaque);
-  }
-  setHtml('f1-leitura',  D.txt.f1_leitura);
+  // F1 — barras verticais com "Não conheço nenhum" destacado em vermelho
+  const canaisComCor = D.canais.map(c => ({
+    ...c,
+    cor: c.label === 'Não conheço nenhum' ? 'var(--red)' : 'var(--lime)'
+  }));
+  barrasV('f1-canais', canaisComCor, {
+    cor:'var(--lime)', height:340, maxColW:100, gap:5,
+    labelSize:10, valSize:12
+  });
+  setHtml('f1-headline', D.txt.f1_headline);
   setHtml('f1-diretriz', D.txt.f1_diretriz);
 
   // F2 — padrão do slide 16: 3 indicadores (CSAT, CES, Confiança) + 3 distribuições
-  setTxt('f2-contato-pct', f.pct(D.contato_pct));
-  setTxt('f2-contato-n',   `· n = ${D.contato_n} de ${f.n(D.n_total)}`);
+  setHtml('f2-headline', D.txt.f2_headline);
 
   // Confiança não tem b2b nativo — deriva da dist
   const confB2B = (D.confianca.dist.find(d => d.nota === 1)?.pct || 0)
@@ -6895,8 +6921,11 @@ function renderComunicacao() {
   setHtml('f2-diretriz', D.txt.f2_diretriz);
 
   // F3
-  barras('f3-canal', D.canal_pref, {cor:'var(--lime)'});
-  setHtml('f3-leitura',  D.txt.f3_leitura);
+  barrasV('f3-canal', D.canal_pref, {
+    cor:'var(--lime)', height:340, maxColW:100, gap:5,
+    labelSize:10, valSize:12
+  });
+  setHtml('f3-headline', D.txt.f3_headline);
   setHtml('f3-diretriz', D.txt.f3_diretriz);
 }
 
@@ -6995,31 +7024,41 @@ function renderCruzamentoTempo() {
       NPS = %Promotores (9–10) − %Detratores (0–6) · Satisfação e Confiança: média da escala 1–5 · Evolução +: % que vê a rodovia "Muito melhor" ou "Um pouco melhor" que há 2 anos (só perguntada para usuários com 2+ anos de rodovia).
     </p>
   `;
-  setHtml('g0-leitura',  D.txt.g0_leitura);
+  setHtml('g0-headline', D.txt.g0_headline);
   setHtml('g0-diretriz', D.txt.g0_diretriz);
 }
 
 function renderDrivers() {
-  // I1
-  document.getElementById('i1-r2') && (document.getElementById('i1-r2').textContent = '56%');
-  driverRows('i1-drivers', D.drivers.sat);
-  setHtml('i1-leitura',  D.txt.i1_leitura);
+  // I1 — drivers de satisfação
+  const satItems = D.drivers.sat;
+  const satSig   = satItems.filter(d => d.sig).length;
+  const satDom   = satItems[0].label;
+  const r2SatTxt = Math.round(D.drivers.r2_sat * 100) + '%';
+  document.getElementById('i1-r2')  && (document.getElementById('i1-r2').textContent  = r2SatTxt);
+  document.getElementById('i1-sig') && (document.getElementById('i1-sig').textContent = `${satSig} de ${satItems.length}`);
+  document.getElementById('i1-dom') && (document.getElementById('i1-dom').textContent = satDom);
+  driverRows('i1-drivers', satItems);
+  setHtml('i1-headline', D.txt.i1_headline);
   setHtml('i1-diretriz', D.txt.i1_diretriz);
-  // I2
+
+  // I2 — drivers do NPS
   driverRows('i2-drivers-nps', D.drivers.nps);
   comparativoTable('i2-comparativo', D.drivers.comparativo);
   setHtml('i2-achado',   D.txt.i2_achado);
-  setHtml('i2-leitura',  D.txt.i2_leitura);
+  setHtml('i2-headline', D.txt.i2_headline);
   setHtml('i2-diretriz', D.txt.i2_diretriz);
 }
 
 function renderSintese() {
+  setHtml('h1-headline',      D.txt.h1_headline);
   setHtml('h1-crit1',         D.txt.h1_crit1);
   setHtml('h1-crit2',         D.txt.h1_crit2);
   setHtml('h1-crit3',         D.txt.h1_crit3);
   setHtml('h1-pos1',          D.txt.h1_pos1);
   setHtml('h1-pos2',          D.txt.h1_pos2);
   setHtml('h1-enquadramento', D.txt.h1_enquadramento);
+
+  setHtml('h2-headline',      D.txt.h2_headline);
 
   const focoCont = document.getElementById('h2-foco-onda2');
   if (focoCont) focoCont.innerHTML = D.txt.h2_foco.map(t=>
@@ -7043,7 +7082,7 @@ function renderFootnotes() {
   setTxt('fn-b2b', `Base: neutros n=${D.nps_neu_n} (${f.pct(D.nps_neu_pct)} do total, notas 7 e 8 no NPS). Classificação temática automática por palavras-chave; exibição restrita a temas com n≥3.`);
   setTxt('fn-b2c', `Base: promotores n=${D.nps_pro_n} (${f.pct(D.nps_pro_pct)} do total, notas 9 e 10 no NPS). Classificação temática automática por palavras-chave; exibição restrita a temas com n≥3.`);
   setTxt('fn-g0',  `Base total n=${n} (Q_13 tempo de uso da BR-163) · NPS: Q_38 recodificada (código − 1) · Satisfação: Q_37 (1–5) · Confiança: Q_35 (1–5) · Evolução percebida: Q_14, condicional a 2+ anos de uso (base n=${f.n(D.cruzamento_tempo.base_evol_n)}) · Respostas "Não sei" excluídas dos cálculos de média.`);
-  setTxt('fn-g1',  `Regressão OLS · n=${D.drivers.n_sat} (listwise) · R²=${D.drivers.r2_sat.toFixed(3).replace('.', ',')} · variável dependente: Q28 — satisfação geral (1–5).`);
+  setTxt('fn-g1',  `Regressão OLS · n=${D.drivers.n_sat} (listwise) · R²=${D.drivers.r2_sat.toFixed(3).replace('.', ',')} · variável dependente: Q37 — satisfação geral (1–5).`);
   setTxt('fn-g2',  `Regressão OLS · n=${D.drivers.n_nps} · R²=${D.drivers.r2_nps.toFixed(3).replace('.', ',')} para NPS · R²=${D.drivers.r2_sat.toFixed(3).replace('.', ',')} para satisfação · ★ p<0,05 · ★★ p<0,01 · ★★★ p<0,001.`);
   setTxt('ttl-f1', `(RM · n = ${n})`);
   setTxt('ttl-f2', `(n = ${n})`);

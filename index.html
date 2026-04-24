@@ -182,6 +182,10 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
 .hl-lime   { color: var(--lime-txt);font-weight: 700; }
 .hl-ink    { color: var(--ink);     font-weight: 700; }
 
+/* Sobre fundo escuro (enquadramento do s-h1): hl-ink precisa inverter pra branco e hl-lime pra lime claro */
+#h1-enquadramento .hl-ink  { color: #fff; }
+#h1-enquadramento .hl-lime { color: var(--lime); }
+
 /* Headline analítico — takeaway abaixo do título/rule, acima dos resultados */
 .headline-analitica{
   position:relative;display:block;
@@ -281,58 +285,118 @@ html,body{height:100%;overflow:hidden;font-family:"Montserrat",system-ui,sans-se
   .topbar-tag{font-size:9px;letter-spacing:.10em;padding:2px 8px;}
   .deck{top:48px;bottom:42px;}
   .bottombar{height:42px;padding:0 12px 4px;}
-  .slide{padding:14px 16px;gap:8px;min-height:calc(100vh - 48px - 42px);}
+  .slide{padding:14px 16px;gap:8px;min-height:calc(100vh - 48px - 42px);overflow-x:hidden;}
   .cover,.chapter{min-height:calc(100vh - 48px - 42px);}
 
-  /* Grids: 2-col → 1 col; kpis-4 → 2×2 para ficar mais compacto */
+  /* Todos os grids multi-col → 1 col. kpis-4 → 2×2 (mais compacto que 4×1). */
   .grid2,.grid3,.grid-asym,.kpis-3,.nps-groups{grid-template-columns:1fr!important;}
   .kpis-4{grid-template-columns:repeat(2,1fr)!important;}
 
   .hero-bg{display:none;}
-  .title{font-size:clamp(20px,5vw,28px);}
-  .rank-row{grid-template-columns:minmax(90px,40%) 1fr 44px;}
+  .title{font-size:clamp(20px,5vw,28px);line-height:1.1;}
+  .subtitle{font-size:12.5px;}
+  .kicker{font-size:9.5px;}
+  .rank-row{grid-template-columns:minmax(90px,40%) 1fr 44px;font-size:11.5px;}
+
+  /* Cards mais enxutos */
+  .card{padding:12px 14px;border-radius:14px;}
+  .card h3{font-size:12.5px;line-height:1.25;word-wrap:break-word;}
 
   /* Headline analítico compacto */
   .headline-analitica{font-size:13.5px;padding:10px 12px 10px 30px;margin:0 0 10px;line-height:1.5;}
   .headline-analitica::before{left:11px;top:11px;font-size:15px;}
 
-  /* Sumário: 2 col (override do @media de linha única acima) e drivers */
-  .toc-grid{grid-template-columns:1fr 1fr;}
-  .driver-row{gap:8px;padding:6px 0;}
+  /* Diretriz e pé */
+  .diretriz{padding:11px 13px;font-size:11.5px;line-height:1.55;}
+  .footnote{font-size:9.5px;}
+
+  /* Sumário: 2 col */
+  .toc-grid{grid-template-columns:1fr 1fr;gap:8px;}
+  .toc-item{padding:10px 12px;}
+  .toc-titulo{font-size:11.5px;}
+  .toc-desc{font-size:10px;}
+
+  /* Drivers — label narrow + ellipsis, bar mais fininha */
+  .driver-row{gap:8px;padding:6px 0;font-size:11px;}
   .driver-lbl{flex:0 0 120px;font-size:11px;}
+  .driver-bar-wrap{height:16px;}
   .driver-val{flex:0 0 38px;font-size:11px;}
+  .driver-sig{flex:0 0 16px;font-size:11px;}
 
-  /* Tabela do s-g0 — 6 colunas precisam de mais respiro lateral */
+  /* Tabela do s-g0 — 6 colunas: fonte e padding menores + scroll horizontal se faltar espaço */
+  #s-g0 #g0-tabela{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   #s-g0 #g0-tabela table{font-size:11px!important;}
-  #s-g0 #g0-tabela td{padding:10px 3px!important;}
-  #s-g0 #g0-tabela th{padding:8px 3px!important;font-size:9px!important;}
+  #s-g0 #g0-tabela td{padding:10px 4px!important;}
+  #s-g0 #g0-tabela th{padding:8px 4px!important;font-size:9px!important;}
 
-  /* Heatmap (s-d3): label column mais estreita pros tiles respirarem */
+  /* Heatmap (s-d3): label column estreita pros tiles respirarem */
   #s-d3 #d3-heatmap{grid-template-columns:minmax(80px,.9fr) repeat(4, 1fr)!important;gap:6px!important;}
+
+  /* NPS score reduzido para não engolir a tela */
+  .nps-score{font-size:52px!important;}
 }
 
 /* ── MOBILE NARROW (smartphone vertical · ≤ 480px) ─────────── */
 @media(max-width:480px){
   .topbar-tag{display:none;}
   .slide{padding:12px 12px;}
-  .title{font-size:19px;}
-  .card{padding:10px 12px;border-radius:12px;}
+  .title{font-size:20px;}
+  .subtitle{font-size:12px;}
+  .card{padding:11px 12px;border-radius:12px;}
   .card h3{font-size:12px;}
-  .headline-analitica{font-size:12.5px;padding:9px 10px 9px 26px;}
+  .headline-analitica{font-size:12.5px;padding:9px 10px 9px 26px;line-height:1.45;}
   .headline-analitica::before{left:9px;top:10px;font-size:13px;}
 
   /* Sumário e KPIs-4 → 1 col em telas muito estreitas */
   .toc-grid{grid-template-columns:1fr!important;}
   .kpis-4{grid-template-columns:1fr!important;}
 
+  /* Drivers ainda mais apertados */
   .driver-lbl{flex:0 0 95px!important;font-size:10px;}
   .driver-val{flex:0 0 32px;font-size:10.5px;}
-  .diretriz{padding:10px 12px;font-size:11.5px;}
+  .driver-bar-wrap{height:14px;}
+
+  /* Diretriz + footnote */
+  .diretriz{padding:10px 12px;font-size:11px;}
   .diretriz-label{font-size:9px;}
   .footnote{font-size:9px;}
 
   /* Heatmap (s-d3) em 320–400px: fonte menor para caber 4 tiles */
-  #s-d3 #d3-heatmap{grid-template-columns:minmax(70px,.8fr) repeat(4, 1fr)!important;gap:4px!important;}
+  #s-d3 #d3-heatmap{grid-template-columns:minmax(70px,.85fr) repeat(4, 1fr)!important;gap:4px!important;}
+
+  /* NPS ainda menor */
+  .nps-score{font-size:46px!important;}
+}
+
+/* ── SAFETY: evita overflow horizontal em imagens/conteúdos largos ── */
+.card img,.card svg{max-width:100%;height:auto;}
+.card,.diretriz{overflow-wrap:break-word;word-wrap:break-word;}
+
+/* ── SAFETY MOBILE: solta o flex:1 dos grids principais pra conteúdo scrollar natural ── */
+@media(max-width:768px){
+  .slide > .grid2,
+  .slide > .grid3,
+  .slide > .grid-asym{
+    flex:0 0 auto!important;
+    align-items:stretch;
+  }
+
+  /* Grids INLINE (ex: "display:grid;grid-template-columns:2fr 3fr") → 1 col */
+  .slide > div[style*="display:grid"][style*="grid-template-columns"]{
+    grid-template-columns:1fr!important;
+    flex:0 0 auto!important;
+  }
+
+  /* Flex rows INLINE com múltiplos cards (ex: slides de vozes B2a/b/c) → stack column */
+  .slide > div[style*="display:flex"]:not([style*="flex-direction:column"]){
+    flex-direction:column!important;
+    flex:0 0 auto!important;
+  }
+  /* Cards dentro de flex inline convertido: soltar flex:1 pra altura natural */
+  .slide > div[style*="display:flex"] > .card[style*="flex:1"]{
+    flex:0 0 auto!important;
+    min-width:0!important;
+  }
 }
 </style>
 </head>
@@ -6006,7 +6070,7 @@ const D = {
     h1_crit3: "<b class='hl-red'>42,3% não conhecem nenhum canal</b> de contato da concessionária. A análise de drivers confirma que <b class='hl-ink'>sinalização aparece entre os cinco preditores significativos do NPS (β=+0,16)</b> — canal de comunicação e percepção de orientação em rota se reforçam.",
     h1_pos1: "<b class='hl-green'>Ambulância com 4,80/5 e 95% de T2B</b>. Guincho com 4,27/5 e 83%. Os serviços operacionais aparecem espontaneamente nas vozes dos promotores e são o <b class='hl-green'>principal ponto de diferenciação positiva</b> da Nova Rota.",
     h1_pos2: "<b class='hl-green'>86,2% percebem melhora nos últimos 2 anos</b>. A regressão confirma o papel do ritmo das obras — <b class='hl-green'>2º driver de satisfação (β=+0,19)</b> e 3º do NPS (β=+0,16). Comunicar progresso concreto converte essa percepção em avaliação mensurável.",
-    h1_enquadramento: "A análise multivariada separou drivers reais de correlatos. <b class='hl-green'>Pavimento domina ambos os modelos</b>. Satisfação: também Ritmo, Confiança, Segurança e Clareza. NPS: também Segurança, Ritmo, Sinalização e Confiança. Agendas convergentes — entregar pavimento e acelerar obras move os dois indicadores simultaneamente. As próximas ondas medirão a reação do usuário à entrega.",
+    h1_enquadramento: "A análise multivariada separou drivers reais de correlatos. <b class='hl-green'>Pavimento domina ambos os modelos</b>. Satisfação: também Ritmo, Confiança, Segurança e Clareza. NPS: também Segurança, Ritmo, Sinalização e Confiança. <b class='hl-ink'>Agendas convergentes</b> — entregar pavimento e acelerar obras move os dois indicadores simultaneamente. As próximas ondas medirão a reação do usuário à entrega.",
 
     i1_headline: "O modelo identificou <b class='hl-ink'>cinco fatores com efeito independente e significativo</b> sobre a satisfação geral. <b class='hl-green'>Pavimento é o driver dominante (β=+0,40)</b>, com efeito mais de duas vezes maior que o segundo. Seguem <b class='hl-green'>Ritmo das obras (β=+0,19)</b>, <b>Confiança nas informações (β=+0,16)</b>, <b>Segurança geral (β=+0,12)</b> e <b>Clareza sobre as obras (β=+0,08)</b>. Os demais itens correlacionam com satisfação, mas têm efeito absorvido pelos drivers acima.",
     i1_diretriz: "Para mover satisfação: <b class='hl-green'>prioridade absoluta é pavimento</b>, reforçado pelo ritmo de entrega das obras. Comunicação e transparência (confiança, clareza) aparecem como drivers secundários — úteis para sustentar a narrativa enquanto a entrega física acontece. <b>O modelo explica 54% da variação</b> na satisfação — base sólida para priorizar investimento.",
@@ -6120,6 +6184,10 @@ function pizza(id, items, opts={}) {
 }
 
 // Barras verticais (colunas). Escala pela maior categoria.
+// Layout:
+//   Grid 2 rows: [1fr barras+valor] [auto para labels — cresce pro mais longo]
+//   Dentro da coluna: spacer (flex:100-pct) + valor + barra (flex:pct) → valor grudado no topo da barra, bases alinhadas.
+// Labels nunca são clipadas: row "auto" do grid acomoda o label mais alto e todas as outras alinham.
 // opts: cor, height (px do bloco inteiro), labelSize, valSize, gap, maxColW.
 function barrasV(id, items, opts={}) {
   const el = document.getElementById(id);
@@ -6131,19 +6199,22 @@ function barrasV(id, items, opts={}) {
   const gap       = opts.gap       != null ? opts.gap     : 6;
   const maxColW   = opts.maxColW   != null ? opts.maxColW : 48;
   const max       = Math.max(...items.map(i => i.pct)) || 1;
-  const bandH     = height - 44; // espaço útil para a barra, descontando label + valor
+  const cols = items.map(() => '1fr').join(' ');
   el.innerHTML = `
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:${gap}px;height:${height}px;padding:0 2px">
+    <div style="display:grid;grid-template-columns:${cols};grid-template-rows:1fr auto;column-gap:${gap}px;row-gap:4px;height:${height}px;padding:0 2px">
       ${items.map(item => {
         const c = item.cor || cor;
-        const h = Math.max(4, Math.round((item.pct / max) * bandH));
+        const pctRel = (item.pct / max) * 100;
         return `
-          <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end">
-            <span style="font-size:${valSize}px;font-weight:800;color:${c};line-height:1;white-space:nowrap">${f.pct(item.pct)}</span>
-            <div style="width:100%;max-width:${maxColW}px;height:${h}px;background:${c};border-radius:5px 5px 0 0;min-height:4px"></div>
-            <span style="font-size:${labelSize}px;font-weight:600;color:var(--muted);text-align:center;line-height:1.15;word-break:break-word;max-width:100%">${item.label}</span>
+          <div style="display:flex;flex-direction:column;align-items:center;height:100%;min-width:0">
+            <div style="flex:${Math.max(0, 100 - pctRel)};min-height:0"></div>
+            <span style="font-size:${valSize}px;font-weight:800;color:${c};line-height:1;white-space:nowrap;margin-bottom:2px;flex-shrink:0">${f.pct(item.pct)}</span>
+            <div style="width:100%;max-width:${maxColW}px;flex:${Math.max(0.01, pctRel)};background:${c};border-radius:5px 5px 0 0;min-height:4px"></div>
           </div>`;
       }).join('')}
+      ${items.map(item => `
+        <span style="font-size:${labelSize}px;font-weight:600;color:var(--muted);text-align:center;line-height:1.2;word-break:break-word;padding:0 2px;align-self:start">${item.label}</span>
+      `).join('')}
     </div>`;
 }
 
